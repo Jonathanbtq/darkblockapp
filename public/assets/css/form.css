@@ -1,0 +1,33 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+form div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 10px;
+}
+form div:nth-child(1) input{
+    height: 5vw;
+}
+form div:nth-child(4) input{
+    border: none;
+}
+form div input{
+    height: 2vw;
+    border: 1px rgba(128, 128, 128, 0.199) solid;
+    border-radius: 5px;
+    width: 100%;
+}
+form label{
+    font-size: 20px;
+}
+form button{
+    border: none;
+    height: 2vw;
+    font-size: 15px;
+    font-weight: bold;
+}

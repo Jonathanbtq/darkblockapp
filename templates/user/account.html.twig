@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<div class="main_acc_div">
+    <div class="acc_wth">
+        <h1>Bienvenue {{user.email}}</h1>
+        <a href="">Modifier mes informations</a>
+        <h2>Tes Candidatures</h2>
+        {% for candidature in candidatures %}
+            <div class="acc_candid_div">
+                <h3>Candidature du {{candidature.getDateCandidature|date("d/m/y")}}</h3>
+                <p>Pour {{candidature.getPseudoInGame}}</p>
+                <a href="{{path('show_candidature', {id: candidature.id})}}">En voir plus</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+.main_acc_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    width: 100%;
+}
+.acc_wth{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}

@@ -3,7 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="{{ asset('assets/css/nav.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/accueil.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/candidature.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/logreg.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/candidshow.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
+
+        <script src="{{asset('assets/js/imgformcandid.js')}}" defer></script>
         {% block stylesheets %}
         {% endblock %}
 
@@ -11,6 +23,7 @@
         {% endblock %}
     </head>
     <body>
+        {% include "_partials/_nav.html.twig" %}
         {% block body %}{% endblock %}
     </body>
 </html>

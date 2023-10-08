@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="main_accueil_div">
+        <div class="acc_ctn">
+            <div class="acc_top">
+                <h1>LordBlock Candidature</h1>
+                <p>Bienvenur sur le site de la LordBlock, une guilde du serveur Spartacube !</p>
+                <p>Pour toute candidature, veuillez cliquer sur ce bouton !</p>
+                <a href="{{path('candidature')}}">Candidature LordBlock</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

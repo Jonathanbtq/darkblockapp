@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CandidatureController!{% endblock %}
+
+{% block body %}
+<div class="main_candidshow_div">
+    <div class="candidshow_ctn">
+        <h1>Candidature pour la LordBlock</h1>
+        <p class="date">Datant du {{candidature.getDateCandidature|date("d/m/y")}}</p>
+        
+        <h3>Pseudo in game</h3>
+        <p>{{candidature.getPseudoInGame}}</p>
+
+        <h3>Texte de candidature</h3>
+        <p>{{candidature.text}}</p>
+
+        <h3>Url</h3>
+        <ul class="url-list">
+        {% for url in candidature.getUrls %}
+            <li><a href="{{url.getTextUrl}}">{{url.getTextUrl}}</a></li>
+        {% endfor %}
+        </ul>
+
+        <div class="candid_show_img">
+            <h3>Images de la candidature</h3>
+            <div class="cdd_shw_img_div">
+                {% for img in candidature.getImages %}
+                    <img src="/uploads/photos/{{candidature.id}}/{{img.getName}}" alt="">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

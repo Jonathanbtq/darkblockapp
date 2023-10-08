@@ -1,0 +1,61 @@
+{% block javascripts %}{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+{% endblock %}
+<nav class="navbar nav_link">
+    <div class="nav_center">
+        <div class="header_nav">
+            <h1>
+                <a href="{{path('main')}}"><img src="{{asset('images/lordblock_logo.png')}}" alt=""></a>
+            </h1>
+            {# <a class="title_site" href="{{ path('main') }}"><img src="{{ asset('assets/images/index/logolinkz.png') }}" alt=""></a> #}
+        </div>
+        <div class="nav_ctn" id="navbarNav">
+            <ul class="navbar_nav_ul">
+                <li class="nav_item_btn">
+                    <a href="{{path('main')}}">Accueil</a>
+                </li>
+                <li class="nav_item_btn">
+                    <a href="{{path('candidature')}}">Candidature</a>
+                </li>
+                {% if app.user %}
+                    <li class="nav_item_btn">
+                        <a href="{{path('account')}}">Profile</a>
+                    </li>
+                {% else %}
+                    <li class="nav_item_btn">
+                        <a href="{{path('app_login')}}">Connexion</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <a id="closeBtn" href="#" class="close">×</a>
+            <ul>
+                <li class="nav_item_btn">
+                    <a href="{{path('main')}}">Accueil</a>
+                </li>
+                <li class="nav_item_btn">
+                    <a href="{{path('candidature')}}">Candidature</a>
+                </li>
+                {% if app.user %}
+                    <li class="nav_item_btn">
+                        <a href="{{path('account')}}">Profile</a>
+                    </li>
+                {% else %}
+                    <li class="nav_item_btn">
+                        <a href="{{path('app_login')}}">Connexion</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <a href="#" id="openBtn">
+            <span class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </a>
+    </div>
+</nav>
