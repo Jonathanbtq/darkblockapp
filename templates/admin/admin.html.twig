@@ -8,23 +8,41 @@
         <div class="admin_top">
             {# <a href="{{path('admin_mail')}}">Mail</a> #}
             <h1>Admin Panel</h1>
-            <div class="adm_list_user">
-                {% for user in users %}
-                    <div class="adm_user_card">
-                        {% if user.pseudo is defined %}
-                            <p>{{user.pseudo}}</p>
-                        {% else %}
-                            <p>{{user.email}}</p>
-                        {% endif %}
-                        {% if user.candidatures is defined %}
-                            {% for candid in user.candidatures %}
-                                <h2>{{candid.id}}</h2>
-                                <p>{{candid.getDateCandidature|date("d/m/Y")}}</p>
-                                <a href="{{path('candidature', {id:candid.id})}}">Candidature</a>
-                            {% endfor %}
-                        {% endif %}
+            <div class="adm_candid_list">
+                <h2>Candidatures</h2>
+                {% for candidature in candidatures %}
+                    <div class="card adm_candid_card">
+                        <div class="card_body">
+                            <h5 class="card-title">#{{candidature.id}}</h5>
+                            <p class="card-title">De {{candidature.getPseudoInGame}}</p>
+                            <p class="card-text">Statut : {{candidature.status}}</p>
+                            <p class="card-text">Date : {{candidature.getDateCandidature|date("d/m/Y")}}</p>
+                            <a href="{{path('show_candidature', {id:candidature.id})}}" class="btn btn-primary">Voir la Candidature</a>
+                        </div>
                     </div>
                 {% endfor %}
+            </div>
+            <div class="adm_list_user">
+                <h2>Users</h2>
+                <div class="adm_user_list_ctn">
+                    {% for user in users %}
+                        <div class="adm_user_card">
+                            {% if user.pseudo is defined %}
+                                <p>{{user.pseudo}}</p>
+                            {% else %}
+                                <p>{{user.email}}</p>
+                            {% endif %}
+                            {% if user.candidatures is defined %}
+                                {% for candid in user.candidatures %}
+                                    <h2>{{candid.id}}</h2>
+                                    <p>{{candid.status}}</p>
+                                    <p>{{candid.getDateCandidature|date("d/m/Y")}}</p>
+                                    <a href="{{path('show_candidature', {id:candid.id})}}">Candidature</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

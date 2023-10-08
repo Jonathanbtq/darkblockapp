@@ -5,7 +5,18 @@
 {% block body %}
 <div class="main_candidshow_div">
     <div class="candidshow_ctn">
+        <div class="cdd_header">
         <h1>Candidature pour la LordBlock</h1>
+        {% if app.user %}
+            {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                <div class="admin_candid">
+                    <a href="{{path('admin_accept_candid', {idcandid: candidature.id})}}">Accepter</a>
+                    <a href="{{path('admin_refused_candid', {idcandid: candidature.id})}}">Refuser</a>
+                </div>
+            {% endif %}
+        {% endif %}
+        </div>
+        
         <p class="date">Datant du {{candidature.getDateCandidature|date("d/m/y")}}</p>
         
         <h3>Pseudo in game</h3>

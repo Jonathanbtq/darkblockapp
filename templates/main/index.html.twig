@@ -5,11 +5,31 @@
 {% block body %}
     <div class="main_accueil_div">
         <div class="acc_ctn">
-            <div class="acc_top">
-                <h1>LordBlock Candidature</h1>
-                <p>Bienvenur sur le site de la LordBlock, une guilde du serveur Spartacube !</p>
-                <p>Pour toute candidature, veuillez cliquer sur ce bouton !</p>
-                <a href="{{path('candidature')}}">Candidature LordBlock</a>
+            <div class="acc_header_main">
+                <img src="{{asset('images/fondimage.png')}}" alt="">
+                <div class="acc_top">
+                    <h1>LordBlock Candidature</h1>
+                    <p>Bienvenue sur le site de la LordBlock, une guilde du serveur Spartacube !</p>
+                    <p>Pour toute candidature, veuillez cliquer sur ce bouton !</p>
+                    <a href="{{path('candidature')}}">Candidature LordBlock</a>
+                </div>
+            </div>
+            <div class="acc_mdd_div">
+                <div class="member_acc_list">
+                    <h1>Membres de la guilde</h1>
+                    <p>Si vous aussi vous voulez faire partie de la guilde ?! n'hesitez pas a passer la candidature</p>
+                    <p>Un minimum de niveau de build est éxiger</p>
+                    <p>Pourquoi pas se lancer dans de futur projet de build en guilde?</p>
+                    <div class="member_list">
+                        {% for membre in membres %}
+                            <p>{{membre.pseudo}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="acc_server_url">
+                    <img src="{{asset('images/sparta.png')}}" alt="">
+                    <h2>Spartacube.fr</h2>
+                </div>
             </div>
         </div>
     </div>

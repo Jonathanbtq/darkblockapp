@@ -25,7 +25,6 @@ class CandidatureController extends AbstractController
     #[Route('/candidature', name: 'candidature')]
     public function index(Request $request, CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, MailerInterface $mailer, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
     {
-        $user = $this->getUser();
         $addIp = $_SERVER['REMOTE_ADDR'];
 
         $candidature = new Candidature();
@@ -33,37 +32,41 @@ class CandidatureController extends AbstractController
         $form->handleRequest($request);
 
         $message = '';
-        $candidExist = $candidatureRepo->findBy(['user' => $this->getUser()]);
-        if(count($candidExist) > 5 ){
-            return $this->redirectToRoute('error_candid');
-        }else{
-            if($form->isSubmitted() && $form->isValid()){
-                $candidature->setUser($this->getUser());
-                $candidature->setDateCandidature(new \DateTime());
-                $candidature->setStatus('En vérification');
-                $candidature->setAdresseIp($addIp);
-                $candidatureRepo->save($candidature, true);
 
-                if($urltext = $form['url']->getData()){
-                    $url = new Url();
-                    $url->setTextUrl($urltext);
-                    $url->setCandidature($candidature);
-                    $urlRepo->save($url, true);
-                }
-
-                if($multipleImg = $form['productImgs']->getData()){
-                    $filenames = $this->createFolderImgs($photoDir, $multipleImg, $candidature);
-                    foreach($filenames as $filename){
-                        $candidImg = new Image();
-                        $candidImg->setName($filename);
-                        $candidImg->setCandidature($candidature);
-                        $imageRepo->save($candidImg, true);
-                    }
-                }
-
-                return $this->redirectToRoute('main');
-            }  
+        if($this->getUser()){
+            $candidExist = $candidatureRepo->findBy(['user' => $this->getUser()]);
+            if(count($candidExist) > 5 ){
+                return $this->redirectToRoute('error_candid');
+            }
         }
+        if($form->isSubmitted() && $form->isValid()){
+            if($this->getUser()){
+                $candidature->setUser($this->getUser());
+            }
+            $candidature->setDateCandidature(new \DateTime());
+            $candidature->setStatus('En vérification');
+            $candidature->setAdresseIp($addIp);
+            $candidatureRepo->save($candidature, true);
+
+            if($urltext = $form['url']->getData()){
+                $url = new Url();
+                $url->setTextUrl($urltext);
+                $url->setCandidature($candidature);
+                $urlRepo->save($url, true);
+            }
+
+            if($multipleImg = $form['productImgs']->getData()){
+                $filenames = $this->createFolderImgs($photoDir, $multipleImg, $candidature);
+                foreach($filenames as $filename){
+                    $candidImg = new Image();
+                    $candidImg->setName($filename);
+                    $candidImg->setCandidature($candidature);
+                    $imageRepo->save($candidImg, true);
+                }
+            }
+
+            return $this->redirectToRoute('main');
+        }  
 
         $email = (new Email())
             ->from('contact@LordBlock.com')
@@ -106,7 +109,7 @@ class CandidatureController extends AbstractController
     }
 
     #[Route('/candidature/{id}', name: 'show_candidature')]
-    public function showcandid($id, CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
+    public function showcandid($id, CandidatureRepository $candidatureRepo): Response
     {
         $candid = $candidatureRepo->findOneBy(['id' => $id]);
         return $this->render('candidature/showcandid.html.twig', [
@@ -115,7 +118,7 @@ class CandidatureController extends AbstractController
     }
 
     #[Route('/toomuchcandid', name: 'error_candid')]
-    public function errorcandid(CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
+    public function errorcandid(): Response
     {
         $message = 'Vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
         return $this->render('candidature/errorcandid.html.twig', [

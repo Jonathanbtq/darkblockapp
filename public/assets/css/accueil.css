@@ -3,27 +3,54 @@
     justify-content: center;
     width: 100%;
     padding-top: 50px;
+    background-color: black;
 }
 .acc_ctn{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 60%;
+    width: 100%;
+}
+.acc_header_main{
+    display: flex;
+    width: 100%;
+    height: 30vw;
+    position: relative;
+}
+.acc_header_main img{
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .acc_top{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    position: absolute;
+    top: 50%; /* Positionne la div .acc_top au milieu de .acc_header_main en fonction de sa hauteur */
+    left: 50%; /* Positionne la div .acc_top au milieu de .acc_header_main en fonction de sa largeur */
+    transform: translate(-50%, -50%); /* Ajuste la position de .acc_top pour la centrer correctement */
+    padding: 20px; /* Ajoute de l'espacement intérieur à .acc_top */
+    border-radius: 10px; /* Coins arrondis */
+    text-align: center; /* Centre le texte dans .acc_top */
+    background-color: rgba(0, 0, 0, 0.062);
 }
 .acc_top p{
     margin: 0;
+    color: white;
+    font-size: 25px;
+}
+.acc_top h1{
+    color: white;
+    font-size: 50px;
 }
 .acc_top a{
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--red-txt);
-    width: 50%;
+    width: 30%;
     height: 40px;
     border-radius: 5px;
     font-size: 20px;
@@ -31,4 +58,73 @@
     font-weight: bold;
     color: white;
     text-decoration: none;
+}
+.acc_mdd_div{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 50px 0 50px;
+    padding-bottom: 150px;
+    width: 100%;
+}
+.member_acc_list{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-acc-green);
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 50px;
+    width: 50%;
+    height: auto;
+}
+.member_acc_list p{
+    font-size: 20px;
+    margin: 0;
+}
+.member_acc_list h1{
+    margin: 0;
+}
+.member_acc_list h1, .member_acc_list p{
+    color: white;
+}
+.member_list{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(146, 146, 146, 0.096);
+    padding-top: 10px;
+}
+.member_list p{
+    padding: 0 10px 0 0;
+    border-right: 1px grey solid;
+}
+.acc_server_url{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 30%;
+    background-color: blue;
+    margin-right: 50px;
+    border-radius: 25px;
+    height: 5vw;
+}
+.acc_server_url img{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    object-fit: cover;
+}
+.acc_server_url h2{
+    position: absolute;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+@media screen and (max-width: 1280px) {
+    .acc_top{
+        width: 80% !important;
+    }
+    .acc_top h1{
+        margin: 0;
+    }
 }

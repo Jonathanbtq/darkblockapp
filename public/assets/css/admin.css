@@ -20,9 +20,45 @@ width: 100%;
     font-size: 25px;
     font-weight: bold;
 }
+.adm_candid_list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.adm_candid_card{
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin: 10px;
+    padding: 15px;
+    width: 80%;
+}
+.adm_candid_card p{
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+.card_body{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.card_body h5{
+    margin: 0 10px 0 0;
+    padding: 0;
+}
 .adm_list_user{
     display: flex;
+    flex-direction: column;
+}
+.adm_user_list_ctn{
+    display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 .adm_user_card{
     display: flex;
