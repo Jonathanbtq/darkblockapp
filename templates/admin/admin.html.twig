@@ -10,6 +10,7 @@
             <div class="adm_list_user">
                 {% for user in users %}
                     <div class="adm_user_card">
+                        <a href="{{path('admin_mail')}}">Mail</a>
                         {% if user.pseudo is defined %}
                             <p>{{user.pseudo}}</p>
                         {% else %}

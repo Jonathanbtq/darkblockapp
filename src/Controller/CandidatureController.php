@@ -2,21 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\Candidature;
-use App\Entity\Image;
 use App\Entity\Url;
+use App\Entity\Image;
+use App\Entity\Candidature;
 use App\Form\CandidatureFormType;
-use App\Repository\CandidatureRepository;
-use App\Repository\ImageRepository;
 use App\Repository\UrlRepository;
-use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use App\Repository\ImageRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CandidatureRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CandidatureController extends AbstractController
 {
@@ -33,8 +34,7 @@ class CandidatureController extends AbstractController
         $message = '';
         $candidExist = $candidatureRepo->findBy(['user' => $this->getUser()]);
         if(count($candidExist) > 5 ){
-            $message = 'Vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
-            return $this->redirectToRoute('candidature', ['message' => $message]);
+            return $this->redirectToRoute('error_candid');
         }else{
             if($form->isSubmitted() && $form->isValid()){
                 $candidature->setUser($this->getUser());
@@ -64,15 +64,18 @@ class CandidatureController extends AbstractController
             }  
         }
 
-        $email = (new TemplatedEmail())
+        $email = (new Email())
             ->from('contact@LordBlock.com')
             ->subject('Nouvelle Candidature')
             ->to('botquin.jonathan@yahoo.fr')
-            ->htmlTemplate('_partials/templateemail/mailcandid.html.twig')
+            ->subject('Sujet de l\'e-mail')
+            ->text('un utilisateur a envoyé une candidature pour rejoindre la guilde LordBlock !')
+            ->html('<p>Contenu HTML de l\'e-mail</p>');
+            // ->htmlTemplate('_partials/templateemail/mailcandid.html.twig')
 
-            ->context([
-                'contact' => $user
-            ]);
+            // ->context([
+            //     'contact' => $user
+            // ]);
 
         $mailer->send($email);
         
@@ -107,6 +110,15 @@ class CandidatureController extends AbstractController
         $candid = $candidatureRepo->findOneBy(['id' => $id]);
         return $this->render('candidature/showcandid.html.twig', [
             'candidature' => $candid
+        ]);
+    }
+
+    #[Route('/toomuchcandid', name: 'error_candid')]
+    public function errorcandid(CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
+    {
+        $message = 'Vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
+        return $this->render('candidature/errorcandid.html.twig', [
+            'message' => $message
         ]);
     }
 }
