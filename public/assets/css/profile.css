@@ -10,3 +10,91 @@
     flex-direction: column;
     width: 60%;
 }
+.acc_a_modif{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red-txt);
+    width: 25%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.acc_a_modif:hover{
+    background-color: var(--blue-light-txt);
+}
+.acc_candid_div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px rgba(128, 128, 128, 0.151) solid;
+    padding: 10px;
+}
+.acc_candid_div h3{
+    margin: 0;
+}
+.acc_candid_card {
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.candid_header{
+    padding: 10px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.candid_header h3{
+    font-size: 18px;
+    margin: 0;
+}
+.candid_body{
+    text-align: center;
+    padding: 10px;
+}
+.candid_body p.acc_card_pseudo{
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+}
+.acc_status{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+.acc_status_accepter{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(68, 168, 68);
+    margin: 0;
+}
+.acc_status_refuser{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(204, 97, 97);
+    margin: 0;
+}
+.candid_footer{
+    text-align: center;
+    padding: 10px;
+}
+.more-link{
+    text-decoration: none;
+    background-color: var(--red-txt);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.more-link:hover{
+    background-color: var(--blue-light-txt);
+}

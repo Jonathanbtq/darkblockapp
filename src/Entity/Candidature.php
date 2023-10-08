@@ -34,6 +34,12 @@ class Candidature
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_candidature = null;
 
+    #[ORM\Column(length: 20)]
+    private ?string $status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse_ip = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -149,6 +155,30 @@ class Candidature
     public function setDateCandidature(\DateTimeInterface $date_candidature): static
     {
         $this->date_candidature = $date_candidature;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAdresseIp(): ?string
+    {
+        return $this->adresse_ip;
+    }
+
+    public function setAdresseIp(?string $adresse_ip): static
+    {
+        $this->adresse_ip = $adresse_ip;
 
         return $this;
     }

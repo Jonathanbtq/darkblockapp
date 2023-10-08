@@ -12,9 +12,11 @@
         </div>
         <div class="nav_ctn" id="navbarNav">
             <ul class="navbar_nav_ul">
-                <li class="nav_item_btn">
-                    <a href="{{path('main')}}">Accueil</a>
-                </li>
+                {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                    <li class="nav_item_btn">
+                        <a href="{{path('admin_index')}}">Admin</a>
+                    </li>
+                {% endif %}
                 <li class="nav_item_btn">
                     <a href="{{path('candidature')}}">Candidature</a>
                 </li>
@@ -32,9 +34,6 @@
         <div id="mySidenav" class="sidenav">
             <a id="closeBtn" href="#" class="close">×</a>
             <ul>
-                <li class="nav_item_btn">
-                    <a href="{{path('main')}}">Accueil</a>
-                </li>
                 <li class="nav_item_btn">
                     <a href="{{path('candidature')}}">Candidature</a>
                 </li>

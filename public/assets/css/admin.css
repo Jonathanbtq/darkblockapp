@@ -1,0 +1,51 @@
+.admin_ctn{
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+}
+.admin_wth{
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    width: 60%;
+}
+.admin_top{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.admin_top h1{
+    font-size: 25px;
+    font-weight: bold;
+}
+.adm_list_user{
+    display: flex;
+    flex-direction: column;
+}
+.adm_user_card{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px grey solid;
+    background-color: grey;
+    border-radius: 5px;
+    padding: 10px;
+    width: 30%;
+}
+.adm_user_card p{
+    margin: 0;
+}
+.adm_user_card a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red-txt);
+    width: 50%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}

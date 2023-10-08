@@ -9,6 +9,8 @@ use App\Form\CandidatureFormType;
 use App\Repository\CandidatureRepository;
 use App\Repository\ImageRepository;
 use App\Repository\UrlRepository;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,39 +21,65 @@ use Doctrine\ORM\EntityManagerInterface;
 class CandidatureController extends AbstractController
 {
     #[Route('/candidature', name: 'candidature')]
-    public function index(Request $request, CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
+    public function index(Request $request, CandidatureRepository $candidatureRepo, UrlRepository $urlRepo, ImageRepository $imageRepo, MailerInterface $mailer, #[Autowire('%candidature_photo_dir%')] string $photoDir): Response
     {
+        $user = $this->getUser();
+        $addIp = $_SERVER['REMOTE_ADDR'];
+
         $candidature = new Candidature();
         $form = $this->createForm(CandidatureFormType::class, $candidature);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $candidature->setUser($this->getUser());
-            $candidature->setDateCandidature(new \DateTime());
-            $candidatureRepo->save($candidature, true);
+        $message = '';
+        $candidExist = $candidatureRepo->findBy(['user' => $this->getUser()]);
+        if(count($candidExist) > 5 ){
+            $message = 'Vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
+            return $this->redirectToRoute('candidature', ['message' => $message]);
+        }else{
+            if($form->isSubmitted() && $form->isValid()){
+                $candidature->setUser($this->getUser());
+                $candidature->setDateCandidature(new \DateTime());
+                $candidature->setStatus('En vérification');
+                $candidature->setAdresseIp($addIp);
+                $candidatureRepo->save($candidature, true);
 
-            if($urltext = $form['url']->getData()){
-                $url = new Url();
-                $url->setTextUrl($urltext);
-                $url->setCandidature($candidature);
-                $urlRepo->save($url, true);
-            }
-
-            if($multipleImg = $form['productImgs']->getData()){
-                $filenames = $this->createFolderImgs($photoDir, $multipleImg, $candidature);
-                foreach($filenames as $filename){
-                    $candidImg = new Image();
-                    $candidImg->setName($filename);
-                    $candidImg->setCandidature($candidature);
-                    $imageRepo->save($candidImg, true);
+                if($urltext = $form['url']->getData()){
+                    $url = new Url();
+                    $url->setTextUrl($urltext);
+                    $url->setCandidature($candidature);
+                    $urlRepo->save($url, true);
                 }
-            }
 
-            return $this->redirectToRoute('main');
+                if($multipleImg = $form['productImgs']->getData()){
+                    $filenames = $this->createFolderImgs($photoDir, $multipleImg, $candidature);
+                    foreach($filenames as $filename){
+                        $candidImg = new Image();
+                        $candidImg->setName($filename);
+                        $candidImg->setCandidature($candidature);
+                        $imageRepo->save($candidImg, true);
+                    }
+                }
+
+                return $this->redirectToRoute('main');
+            }  
         }
+
+        $email = (new TemplatedEmail())
+            ->from('contact@LordBlock.com')
+            ->subject('Nouvelle Candidature')
+            ->to('botquin.jonathan@yahoo.fr')
+            ->htmlTemplate('_partials/templateemail/mailcandid.html.twig')
+
+            ->context([
+                'contact' => $user
+            ]);
+
+        $mailer->send($email);
+        
         return $this->render('candidature/index.html.twig', [
             'controller_name' => 'CandidatureController',
-            'form' => $form
+            'form' => $form,
+            'message' => $message
         ]);
     }
 

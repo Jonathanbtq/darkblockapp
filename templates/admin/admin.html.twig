@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="admin_ctn">
+    <div class="admin_wth">
+        <div class="admin_top">
+            <h1>Admin Panel</h1>
+            <div class="adm_list_user">
+                {% for user in users %}
+                    <div class="adm_user_card">
+                        {% if user.pseudo is defined %}
+                            <p>{{user.pseudo}}</p>
+                        {% else %}
+                            <p>{{user.email}}</p>
+                        {% endif %}
+                        {% if user.candidatures is defined %}
+                            {% for candid in user.candidatures %}
+                                <p>{{candid.getDateCandidature|date("d/m/Y")}}</p>
+                                <a href="{{path('candidature', {id:candid.id})}}">Candidature</a>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
