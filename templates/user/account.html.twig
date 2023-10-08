@@ -5,6 +5,7 @@
 {% block body %}
 <div class="main_acc_div">
     <div class="acc_wth">
+        <a href="{{path('app_logout')}}">Deconnexion</a>
         {% if app.user.pseudo is defined %}
             <h1>Bienvenue {{user.pseudo}}</h1>
         {% else %}

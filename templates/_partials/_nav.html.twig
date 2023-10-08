@@ -12,10 +12,12 @@
         </div>
         <div class="nav_ctn" id="navbarNav">
             <ul class="navbar_nav_ul">
-                {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                    <li class="nav_item_btn">
-                        <a href="{{path('admin_index')}}">Admin</a>
-                    </li>
+                {% if app.user %}
+                    {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                        <li class="nav_item_btn">
+                            <a href="{{path('admin_index')}}">Admin</a>
+                        </li>
+                    {% endif %}
                 {% endif %}
                 <li class="nav_item_btn">
                     <a href="{{path('candidature')}}">Candidature</a>

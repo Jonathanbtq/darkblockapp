@@ -6,11 +6,11 @@
 <div class="admin_ctn">
     <div class="admin_wth">
         <div class="admin_top">
+            {# <a href="{{path('admin_mail')}}">Mail</a> #}
             <h1>Admin Panel</h1>
             <div class="adm_list_user">
                 {% for user in users %}
                     <div class="adm_user_card">
-                        <a href="{{path('admin_mail')}}">Mail</a>
                         {% if user.pseudo is defined %}
                             <p>{{user.pseudo}}</p>
                         {% else %}
@@ -18,6 +18,7 @@
                         {% endif %}
                         {% if user.candidatures is defined %}
                             {% for candid in user.candidatures %}
+                                <h2>{{candid.id}}</h2>
                                 <p>{{candid.getDateCandidature|date("d/m/Y")}}</p>
                                 <a href="{{path('candidature', {id:candid.id})}}">Candidature</a>
                             {% endfor %}

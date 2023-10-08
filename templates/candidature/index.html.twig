@@ -5,6 +5,7 @@
 {% block body %}
 <div class="main_candid_div">
     <h3>{{message}}</h3>
+    <div id="error-message" style="display: none;"></div>
     <div class="candid_ctn">
         <div class="candid_top">
             {% if app.user %}
@@ -15,6 +16,11 @@
         </div>
         <div class="candid_form">
             {{form_start(form)}}
+            {{ form_row(form.text) }}
+            {{ form_row(form.pseudo_in_game) }}
+            {{ form_row(form.url) }}
+            {{ form_row(form.productImgs, {'attr': {'id': 'file-upload'}}) }}
+            {{ form_row(form.submit) }}
             {{form_end(form)}}
         </div>
         <div class="img_previous">

@@ -22,7 +22,7 @@ width: 100%;
 }
 .adm_list_user{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 .adm_user_card{
     display: flex;
@@ -32,6 +32,10 @@ width: 100%;
     border-radius: 5px;
     padding: 10px;
     width: 30%;
+}
+.adm_user_card h2{
+    margin: 0;
+    padding: 0;
 }
 .adm_user_card p{
     margin: 0;
