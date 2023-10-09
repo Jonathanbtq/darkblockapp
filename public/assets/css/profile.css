@@ -8,6 +8,7 @@
 .acc_wth{
     display: flex;
     flex-direction: column;
+    padding-bottom: 150px;
     width: 60%;
 }
 .acc_a_modif{

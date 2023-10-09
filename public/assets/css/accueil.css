@@ -87,6 +87,16 @@
 .member_acc_list h1, .member_acc_list p{
     color: white;
 }
+.nbmember_acc_list{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 20px 0 20px 0;
+}
+.nbmember_acc_list p{
+    font-size: 30px;
+    padding-left: 10px;
+}
 .member_list{
     display: flex;
     flex-wrap: wrap;
@@ -102,14 +112,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 30%;
-    background-color: blue;
+    width: 40%;
     margin-right: 50px;
     border-radius: 25px;
     height: 5vw;
 }
 .acc_server_url img{
-    width: 100%;
+    width: 70%;
     height: 100%;
     border-radius: 25px;
     object-fit: cover;

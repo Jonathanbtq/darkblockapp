@@ -1,0 +1,31 @@
+<div class="footer_dark">
+    <footer>
+        <div class="footer_main">
+            <div class="footer_top">
+                <div class="footer_services">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="{{path('main')}}">Accueil</a></li>
+                        <li><a href="{{path('candidature')}}">Candidatures</a></li>
+                        {% if app.user %}
+                        <li><a href="{{path('account')}}">Profile</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="footer_about">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Guilde</a></li>
+                        <li><a href="#">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer_desc">
+                    <h3>Lord Block</h3>
+                    <p>Lord Block est une guilde dédiée à l'art de la construction dans l'univers de Minecraft. Nous sommes un regroupement de joueurs passionnés par la création de structures exceptionnelles et complexes, repoussant constamment les limites de l'imagination et de la créativité.</p>
+                </div>
+                <div class=""><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+            </div>
+            <p class="copyright">Lord Block © 2023</p>
+        </div>
+    </footer>
+</div>

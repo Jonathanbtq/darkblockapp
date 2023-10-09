@@ -13,8 +13,10 @@ class MainController extends AbstractController
     public function index(MembreRepository $membreRepo): Response
     {
         $membres = $membreRepo->findAll();
+        $nbMember = count($membres);
         return $this->render('main/index.html.twig', [
-            'membres' => $membres
+            'membres' => $membres,
+            'nbMember' => $nbMember
         ]);
     }
 }

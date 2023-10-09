@@ -1,0 +1,66 @@
+.footer_dark{
+    background-color: var(--card-acc-green);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    width: 100%;
+}
+footer h3{
+    color: white;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+.footer_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    width: 80%;
+}
+.footer_top{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.footer_services, .footer_about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+.footer_services a, .footer_about a{
+    text-decoration: none;
+    color: var(--text-grey);
+}
+.footer_services li, .footer_about li{
+    list-style-type: none;
+}
+.footer_services ul, .footer_about ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+}
+.footer_desc{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.footer_desc h3,.footer_desc p{
+    padding: 0;
+    margin: 0;
+}
+.footer_desc p{
+    text-align: center;
+    color: var(--text-grey);
+}
+.copyright{
+    color: white;
+}

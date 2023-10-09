@@ -16,10 +16,10 @@ class CandidatureFormType extends AbstractType
     {
         $builder
             ->add('text', TextType::class, [
-                'label' => 'Text de motivation'
+                'label' => 'Text de motivation*'
             ])
             ->add('pseudo_in_game', TextType::class, [
-                'label' => 'Ton pseudo en jeu'
+                'label' => 'Ton pseudo en jeu*'
             ])
             ->add('url', TextType::class, [
                 'label' => 'Url',
@@ -27,7 +27,7 @@ class CandidatureFormType extends AbstractType
                 'required' => false
             ])
             ->add('productImgs', FileType::class, [
-                'label' => false,
+                'label' => 'Image de tes constructions*',
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false

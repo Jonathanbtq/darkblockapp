@@ -25,7 +25,9 @@
     margin: 0;
 }
 .header_nav a{
+    display: flex;
     font-size: 30px;
+    height: 100%;
     text-decoration: none;
     color: white;
 }
