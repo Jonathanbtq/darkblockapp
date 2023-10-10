@@ -16,24 +16,24 @@ class CandidatureFormType extends AbstractType
     {
         $builder
             ->add('text', TextType::class, [
-                'label' => 'Text de motivation*'
+                'label' => 'Ton texte de motivation* :'
             ])
             ->add('pseudo_in_game', TextType::class, [
-                'label' => 'Ton pseudo en jeu*'
+                'label' => 'Ton pseudo dans le serveur Spartacube* :'
             ])
             ->add('url', TextType::class, [
-                'label' => 'Url',
+                'label' => false,
                 'mapped' => false,
                 'required' => false
             ])
             ->add('productImgs', FileType::class, [
-                'label' => 'Image de tes constructions*',
+                'label' => false,
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer'
+                'label' => 'Envoyer / Valider'
             ])
         ;
     }

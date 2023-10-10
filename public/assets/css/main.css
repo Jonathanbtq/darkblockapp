@@ -9,3 +9,12 @@ body, html{
     --card-acc-green: #344b47;
     --text-grey: rgb(170, 170, 170);
 }
+@font-face {
+    font-family: "Combi Sans W01 SemiBold";
+    src: url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.eot");
+    src: url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/9978e84b6524e8a7550fb144364be7dc.svg#Combi Sans W01 SemiBold")format("svg");
+}

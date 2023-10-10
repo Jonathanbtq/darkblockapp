@@ -11,22 +11,29 @@
     <h3>{{message}}</h3>
     <div id="error-message" style="display: none;"></div>
     <div class="candid_ctn">
-        <div class="text_candid">
-            <p>* ces champs sont obligatoire</p>
-        </div>
         <div class="candid_top">
-            {% if app.user %}
-                <h1>Candidature de {{app.user.email}}</h1>
-            {% else %}
-                <h1>Candidature pour la LordBlock</h1>
-            {% endif %}
+            <h1>Candidature pour rejoindre la</h1>
+            <h1>- LordBlock -</h1>
         </div>
         <div class="candid_form">
             {{form_start(form)}}
             {{ form_row(form.text) }}
             {{ form_row(form.pseudo_in_game) }}
+            <div class="cdd_form_div">
+                <label for="">L'url :</label>
+                <p>(tu peux y mettre les liens de tes réseaux sociaux, sites de builds ou autres pour contempler tes créations :D)</p>
+            </div>
             {{ form_row(form.url) }}
+            <div class="cdd_form_div">
+                <label for="">Les différentes photos de tes constructions mc* :</label>
+                <p class="cdd_f_d_italic">(tu peux cliquer directement sur « Choisir des fichiers » pour nous les présenter !)</p>
+            </div>
             {{ form_row(form.productImgs, {'attr': {'id': 'file-upload'}}) }}
+
+            <div class="cdd_form_warning">
+                <p>Attention : tous les champs * sont obligatoire pour prendre en compte ta candidature.</p>
+            </div>
+
             {{ form_row(form.submit) }}
             {{form_end(form)}}
         </div>

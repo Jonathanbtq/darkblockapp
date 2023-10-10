@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    padding-top: 150px;
+    padding-top: 100px;
     padding-bottom: 150px;
 }
 .candid_ctn{
@@ -13,22 +13,46 @@
     width: 60%;
     padding-top: 50px;
 }
-.text_candid{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
 .text_candid p:nth-child(1){
     font-style: italic;
 }
 .candid_top{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding-bottom: 80px;
+}
+.candid_top h1{
+    margin: 0;
+}
+.cdd_f_d_italic{
+    font-style: italic;
+}
+.candid_ctn div input{
+    height: 2vw;
+    border: 2px rgba(128, 128, 128, 0.199) solid;
+    border-radius: 10px;
+    width: 100%;
+}
+.candid_ctn label{
+    font-size: 22px;
 }
 .candid_form{
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+.cdd_form_div{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding-left: 10%;
+    padding-top: 10pxq;
+}
+.cdd_form_div p{
+    margin: 0;
+    font-size: 15px;
 }
 .img_previous{
     display: flex;
@@ -38,6 +62,9 @@
     max-width: 18vw; /* Ajustez la taille de l'aperçu comme vous le souhaitez */
     max-height: 18vw;
     margin: 5px;
+}
+#candidature_form_productImgs{
+    border: none !important;
 }
 .preview_image{
     display: flex;
@@ -63,6 +90,35 @@
     font-weight: bold;
     color: white;
     text-decoration: none;
+}
+.cdd_form_warning{
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+}
+.cdd_form_warning p{
+    font-weight: bold;
+    margin: 0;
+}
+@media screen and (max-width: 1600px) {
+    .candid_ctn{
+        align-items: center !important;
+    }
+    .candid_form{
+        width: 80% !important;
+    }
+    .cdd_form_div{
+        padding-left: 0% !important;
+    }
+    .candid_form form{
+        width: 100% !important;
+    }
+    .candid_form form div{
+        width: 100% !important;
+    }
+    .candid_form form button{
+        height: 3vw !important;
+    }
 }
 @media screen and (max-width: 1280px) {
     .candid_ctn{
