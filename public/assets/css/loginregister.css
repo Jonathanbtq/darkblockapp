@@ -1,0 +1,130 @@
+.log_div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    background-color: black;
+}
+.log_post_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    height: 18vw;
+    border-radius: 5px;
+    background-color: var(--red-txt);
+    margin: 200px 0 100px 0;
+}
+.log_form_ctn{
+    display: flex;
+    width: 100%;
+    flex-direction: column !important;
+    margin: 0;
+    align-items: center !important;
+}
+.log_h1{
+    font-size: 30px !important;
+    color: white;
+    font-weight: bold;
+}
+.login_input_div{
+    display: flex;
+    flex-direction: column;
+    width: 70% !important;
+    height: 3vw;
+    width: 100%;
+}
+.login_input_div input{
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px white solid;
+    height: 2vw;
+    border-radius: 5px;
+}
+.login_input_div label{
+    color: white;
+}
+.login_btn_submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    border-radius: 5px;
+    background-color: #fdb800;
+}
+.log_form_ctn_a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 2vw;
+    border-radius: 5px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 100px;
+    text-decoration: none;
+    background-color: #fdb800;
+    cursor: pointer;
+}
+@media screen and (max-width: 1280px) {
+    .log_post_div{
+        width: 40% !important;
+        height: 35vw !important;
+    }
+    .login_input_div{
+        height: 7vw !important;
+    }
+    .input_log_div{
+        height: 6vw;
+    }
+    .login_btn_submit{
+        height: 4vw !important;
+    }
+    .log_form_ctn .login_input_div input{
+        height: 4vw !important;
+    }
+}
+@media screen and (max-width: 800px) {
+    .log_post_div{
+        width: 60% !important;
+        height: 45vw !important;
+    }
+    .login_input_div{
+        height: 9vw !important;
+    }
+    .input_log_div{
+        height: 7vw;
+    }
+    .login_btn_submit{
+        height: 6vw !important;
+    }
+    .log_form_ctn .login_input_div input{
+        height: 6vw !important;
+    }
+    .log_form_ctn_a{
+        width: 40%;
+        height: 8vw;
+    }
+}
+@media screen and (max-width: 400px) {
+    .log_post_div{
+        width: 90% !important;
+        height: 80vw !important;
+        margin: 100px 0 100px 0 !important;
+    }
+    .login_input_div{
+        height: 18vw !important;
+    }
+    .input_log_div{
+        height: 10vw;
+    }
+    .login_btn_submit{
+        height: 9vw !important;
+    }
+    .log_form_ctn .login_input_div input{
+        height: 15vw !important;
+    }
+    .log_form_ctn_a{
+        width: 80%;
+        height: 15vw;
+    }
+}

@@ -101,11 +101,17 @@
     margin: 0;
 }
 @media screen and (max-width: 1600px) {
+    .candid_top h1{
+        text-align: center !important;
+    }
     .candid_ctn{
         align-items: center !important;
     }
     .candid_form{
         width: 80% !important;
+    }
+    .candid_form form div input{
+        height: 8vw !important;
     }
     .cdd_form_div{
         padding-left: 0% !important;
@@ -139,7 +145,7 @@
 }
 @media screen and (max-width: 800px) {
     .main_candid_div{
-        padding-top: 100px !important;
+        padding-top: 50px !important;
     }
     .candid_ctn{
         width: 80% !important;
@@ -151,15 +157,45 @@
     .candid_form form{
         width: 100% !important;
     }
+    .candid_form form .cdd_form_div{
+        height: 8vw !important;
+        margin: 0 !important;
+    }
+    .candid_form form .cdd_form_warning{
+        height: 2vw !important;
+    }
     .candid_form form div{
         width: 100% !important;
-        height: 8vw;
+        height: 10vw !important;
     }
     .candid_form form div input{
         width: 100% !important;
-        height: 4vw !important;
+        height: 6vw !important;
     }
     .candid_form form button{
         height: 3vw !important;
+    }
+}
+@media screen and (max-width: 700px) {
+    .main_candid_div{
+        padding-top: 50px !important;
+    }
+    .candid_form form .cdd_form_div{
+        height: 25vw !important;
+        margin: 0 !important;
+    }
+    .candid_form form .cdd_form_warning{
+        height: 10vw !important;
+    }
+    .candid_form form div{
+        width: 100% !important;
+        height: 25vw !important;
+    }
+    .candid_form form div input{
+        width: 100% !important;
+        height: 20vw !important;
+    }
+    .candid_form form button{
+        height: 100% !important;
     }
 }

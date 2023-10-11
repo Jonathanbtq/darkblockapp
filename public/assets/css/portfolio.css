@@ -207,3 +207,42 @@
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.158));;
     border-radius: 15px 15px 0 0;
 }
+@media screen and (max-width: 1280px) {
+    .prt_top_div img{
+        height: 30vw !important;
+    }
+    .prt_equipe_tete_card img{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 920px) {
+    .prt_top_div img{
+        height: 50vw !important;
+    }
+    .prt_equipe_slider{
+        width: 90% !important;
+    }
+    .prt_equipe_tete_card img{
+        width: 100% !important;
+    }
+    .prt_img_crd_div{
+        width: 49% !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    .prt_top_div img{
+        height: 85vw !important;
+    }
+    .prt_img_crd_div{
+        width: 95% !important;
+    }
+    .prt_equipe_slider{
+        overflow: hidden !important;
+    }
+    .prt_img_crd_div p{
+        height: 7vw !important;
+    }
+    .prt_equipe_tete_card{
+        width: 20% !important;
+    }
+}
