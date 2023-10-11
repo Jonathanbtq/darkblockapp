@@ -1,0 +1,209 @@
+.prt_ctn_bigimg{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    display: none;
+}
+.no_scroll{
+    overflow: hidden;
+}
+.prt_ctn_content{
+    padding-right: 15%;
+    margin-left: auto;
+}
+.prt_ctn_content button{
+    display: flex;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+    background: none;
+    color: white;
+    width: 10%;
+}
+.prt_ctn_content button{
+    cursor: zoom-out;
+}
+.prt_figure_content{
+    display: flex;
+    width: 80%;
+    margin: 0;
+}
+.prt_figure_content img{
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    display: block;
+    line-height: 0;
+    box-sizing: border-box;
+    padding: 20px 0 20px;
+    margin: 0 auto;
+}
+.main_prt_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.prt_ctn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    padding-bottom: 100px;
+    width: 100%;
+}
+.prt_top_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.prt_top_div img{
+    object-fit: cover;
+    height: 23vw;
+    width: 100%;
+}
+.prt_desc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+}
+.prt_desc h1{
+    font-size: 30px;
+    color: white;
+}
+.prt_ligne{
+    background-color: white;
+    height: 2px;
+    width: 20%;
+}
+.prt_desc p{
+    font-size: 25px;
+    color: white;
+}
+/******Equipe Zone*******/
+.prt_equipe_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+    width: 100%;
+}
+.prt_equipe_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+    width: 100%;
+}
+.prt_ligne_head{
+    background-color: white;
+    height: 2px;
+    width: 5%;
+}
+.prt_equipe_header h1{
+    font-size: 30px;
+    color: white;
+}
+.prt_equipe_header p{
+    font-size: 25px;
+    color: white;
+}
+.prt_equipe_slider{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 60%;
+}
+.prt_equipe_tete_card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    transition: border-color 1.2s ease;
+    width: 10%;
+}
+.prt_equipe_tete_card img{
+    width: 90%;
+}
+.prt_equipe_tete_card p{
+    color: white;
+}
+.prt_eip_card_dsc{
+    display: none;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px 0 10px;
+    background: rgba(20, 20, 20, 0.877);
+    width: 90%;
+    height: 100%;
+    border-radius: 25px;
+    border-color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    top: 0;
+    right: 0;
+}
+.prt_eip_card_dsc p{
+    color: white;
+    font-size: 22px;
+}
+.prt_img_div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.prt_img_card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 98%;
+    margin: 0 auto;
+}
+.prt_img_crd_div{
+    display: flex;
+    width: 33%;
+    margin-bottom: 10px;
+    position: relative;
+}
+.prt_img_crd_div img{
+    width: 100%;
+}
+.prt_img_crd_div p{
+    height: 3vw;
+    width: 97%;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 20px;
+    margin: 0;
+    opacity: 0.3;
+    font-size: 30px;
+    z-index: 999;
+    color: white;
+    position: absolute;
+}
+.prt_img_crd_div:hover p{
+    opacity: 1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.158));;
+    border-radius: 15px 15px 0 0;
+}

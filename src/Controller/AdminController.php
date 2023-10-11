@@ -3,27 +3,66 @@
 namespace App\Controller;
 
 use App\Entity\Membre;
+use App\Service\Tools;
+use App\Entity\ImageMembre;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
-use App\Repository\CandidatureRepository;
 use App\Repository\MembreRepository;
+use App\Controller\CandidatureController;
+use App\Repository\CandidatureRepository;
+use App\Repository\ImageMembreRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo): Response
+    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo, Request $request, ImageMembreRepository $imgMembreRepo, #[Autowire('%membre_portfolio_dir%')] string $photoDir, MembreRepository $membreRepo): Response
     {
         $candidatures = $candidatureRepo->findAll();
         $utilisateur = $userRepo->findAll();
 
+        $form = $this->createFormBuilder()
+        ->add('pseudo', EntityType::class, [
+            'class' => Membre::class,
+            'choice_label' => 'pseudo'
+        ])
+        ->add('img', FileType::class)
+        ->add('save', SubmitType::class, ['label' => 'Ajouter Image'])
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $membre = $data['pseudo'];
+            $img = $data['img'];
+
+            // Le reste de votre logique pour traiter les données du formulaire
+            $tools = new Tools();
+            $imagePortfolio = new ImageMembre();
+            $filename = $tools->createimgfolder($photoDir, $img, $membre);
+            $imagePortfolio->setMembre($membre);
+            $imagePortfolio->setName($filename);
+
+            $imgMembreRepo->save($imagePortfolio, true);
+            return $this->redirectToRoute('admin_index');
+        }
+
         return $this->render('admin/admin.html.twig', [
             'candidatures' => $candidatures,
-            'users' => $utilisateur
+            'users' => $utilisateur,
+            'form' => $form->createView()
         ]);
     }
 

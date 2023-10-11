@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/tete_portofolio.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div class="prt_ctn_bigimg">
+        <div class="prt_ctn_content">
+            <button>X</button>
+        </div>
+        <figure class="prt_figure_content">
+            <img src="" alt="">
+        </figure>
+    </div>
+    <div class="main_prt_div">
+        <div class="prt_ctn">
+            <div class="prt_top_div">
+                <img src="{{asset('images/portfolioback.png')}}" alt="">
+                <div class="prt_desc">
+                    <h1>PORTFOLIO GUILDE</h1>
+                    <div class="prt_ligne"></div>
+                    <p>Projet des membres de la guilde</p>
+                </div>
+            </div>
+            <div class="prt_equipe_div">
+                <div class="prt_equipe_header">
+                    <h1>Notre équipe</h1>
+                    <div class="prt_ligne_head"></div>
+                </div>
+                <div class="prt_equipe_slider">
+                    {% for membre in membres %}
+                    <div class="prt_equipe_tete_card">
+                        <img src="https://crafatar.com/renders/head/{{membre.getUuid}}?size=64&overlay&default=MHF_Steve" alt="">
+                        <p>{{membre.pseudo}}</p>
+                        <div class="prt_eip_card_dsc">
+                            <p>{{membre.description}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="prt_img_div">
+                <div class="prt_img_card">
+                    {% for img in imgmembre %}
+                        <div class="prt_img_crd_div">
+                            <img src="uploads/portfolioimg/{{img.getMembre.getId}}/{{img.getName}}" alt="">
+                            <p>{{img.getMembre.getPseudo}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

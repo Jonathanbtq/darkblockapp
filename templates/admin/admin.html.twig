@@ -44,6 +44,20 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="adm_add_img_membre">
+                <a href="">Ajouter une image de membre</a>
+                    {{ form_start(form) }}
+                    <div class="adm_form_portfolio">
+                        {{ form_row(form.pseudo) }}
+                    </div>
+                    <div class="adm_form_portfolio">
+                        {{ form_row(form.img) }}
+                    </div>
+                    <div>
+                        {{ form_row(form.save) }}
+                    </div>
+                    {{ form_end(form) }}
+            </div>
         </div>
     </div>
 </div>
