@@ -65,6 +65,10 @@
     align-items: center;
     height: 100% !important;
 }
+.nav_item_btn a:hover{
+    transform: scale(1.002);
+    color: rgb(242, 253, 245);
+}
 .nav_item_btn img{
     height: 100%;
     margin-bottom: 10px;
