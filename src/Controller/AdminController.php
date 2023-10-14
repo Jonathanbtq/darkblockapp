@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Membre;
 use App\Service\Tools;
+use GuzzleHttp\Client;
 use App\Entity\ImageMembre;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
@@ -94,6 +95,17 @@ class AdminController extends AbstractController
         $candidatureRepo->save($candid, true);
 
         $membre = new Membre();
+        $client = new Client();
+        $pseudo = $candid->getPseudoInGame();
+        $response = $client->get("https://api.mojang.com/users/profiles/minecraft/{$pseudo}");
+
+        if ($response->getStatusCode() === 200) {
+            $data = json_decode($response->getBody(), true);
+            $uuid = $data['id'];
+            $membre->setUuid($uuid);
+        } else {
+            $membre->setUuid('null');
+        }
         $membre->setPseudo($candid->getPseudoInGame());
         $membre->setDateAccepted(new \DateTime());
         $membreRepo->save($membre, true);

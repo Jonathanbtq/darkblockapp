@@ -16,6 +16,16 @@
     flex-wrap: nowrap;
     width: 100%;
 }
+.acc_top_info{
+    display: flex;
+    flex-direction: column;
+}
+.acc_top_info h1{
+    margin: 0 0 20px 0;
+}
+.acc_top_info p{
+    margin: 0;
+}
 .acc_a_modif{
     display: flex;
     justify-content: center;
@@ -24,6 +34,7 @@
     width: 25%;
     height: 40px;
     border-radius: 5px;
+    margin: 20px 0 20px 0;
     font-size: 20px;
     font-weight: bold;
     color: white;

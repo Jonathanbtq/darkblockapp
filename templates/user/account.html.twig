@@ -9,13 +9,17 @@
             {% if membre.pseudo is defined %}
                 <img src="https://crafatar.com/renders/head/{{membre.getUuid}}?size=64&overlay&default=MHF_Steve" alt="">
             {% endif %}
-            <h1>Bienvenue 
-                {% if app.user.pseudo is defined %}
-                    {{user.pseudo}}
-                {% else %}
-                    {{user.email}}
-                {% endif %}
-            </h1>
+            <div class="acc_top_info">
+                <h1>Bienvenue 
+                    {% if app.user.pseudo is defined %}
+                        {{user.pseudo}}
+                    {% else %}
+                        {{user.email}}
+                    {% endif %}
+                </h1>
+                <p>Uuid: {{membre.getUuid}}</p>
+            </div>
+            
         </div>
         {# <a href="{{path('app_logout')}}">Deconnexion</a> #}
         <a class="acc_a_modif" href="{{path('account_modif', {id: user.id})}}">Modifier mes informations</a>
