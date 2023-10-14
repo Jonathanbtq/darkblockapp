@@ -11,6 +11,11 @@
     padding-bottom: 150px;
     width: 60%;
 }
+.acc_top_header{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
 .acc_a_modif{
     display: flex;
     justify-content: center;

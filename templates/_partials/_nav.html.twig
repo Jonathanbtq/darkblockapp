@@ -1,7 +1,7 @@
-{% block javascripts %}{% endblock %}
-{% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+{% block javascripts %}
+    <script src="{{asset('assets/js/nav/burgerMenu.js')}}" defer></script>
 {% endblock %}
+{% block stylesheets %}{% endblock %}
 <nav class="navbar nav_link">
     <div class="nav_center">
         <div class="header_nav">
@@ -26,8 +26,17 @@
                     <a href="{{path('portfolio')}}">Portfolio</a>
                 </li>
                 {% if app.user %}
-                    <li class="nav_item_btn">
+                    <li class="nav_item_btn prof_dropdown">
                         <a href="{{path('account')}}">Profile</a>
+                        <ul class="dropdown">
+                            <li><a href="{{path('account')}}">Compte</a></li>
+                            {% if app.user %}
+                                <li><a href="{{path('account_modif', {id: app.user.id})}}">Paramètres</a></li>
+                                <li><a href="{{path('app_logout')}}">Deconnexion</a></li>
+                            {% else %}
+                                <li><a href="{{path('app_login')}}">Connexion</a></li>
+                            {% endif %}
+                        </ul>
                     </li>
                 {% else %}
                     <li class="nav_item_btn">
@@ -39,17 +48,24 @@
         <div id="mySidenav" class="sidenav">
             <a id="closeBtn" href="#" class="close">×</a>
             <ul>
-                <li class="nav_item_btn">
+                {% if app.user %}
+                    {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                        <li class="">
+                            <a href="{{path('admin_index')}}">Admin</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                <li class="">
                     <a href="{{path('candidature')}}">Candidature</a>
                 </li>
+                <li class="">
+                    <a href="{{path('portfolio')}}">Portfolio</a>
+                </li>
                 {% if app.user %}
-                    <li class="nav_item_btn">
-                        <a href="{{path('account')}}">Profile</a>
-                    </li>
+                    <li><a href="{{path('account_modif', {id: app.user.id})}}">Paramètres</a></li>
+                    <li><a href="{{path('app_logout')}}">Deconnexion</a></li>
                 {% else %}
-                    <li class="nav_item_btn">
-                        <a href="{{path('app_login')}}">Connexion</a>
-                    </li>
+                    <li><a href="{{path('app_login')}}">Connexion</a></li>
                 {% endif %}
             </ul>
         </div>

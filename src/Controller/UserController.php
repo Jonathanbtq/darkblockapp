@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Form\UserModificationFormType;
 use App\Repository\CandidatureRepository;
+use App\Repository\MembreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,18 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/account', name: 'account')]
-    public function index(UserRepository $useRepo, CandidatureRepository $candidRepo): Response
+    public function index(UserRepository $useRepo, CandidatureRepository $candidRepo, MembreRepository $membreRepo): Response
     {  
         $user = $this->getUser();
         $candidatures = $candidRepo->findBy(['user' => $user]);
-        if($user){
-
-        }else{
+        $membre = $membreRepo->findOneBy(['pseudo' => $user->pseudo]);
+        if(!$membre){
+            $membre = '';
+        }
+        if(!$user){
             return $this->redirectToRoute('login');
         }
         return $this->render('user/account.html.twig', [
             'user' => $user,
-            'candidatures' => $candidatures
+            'candidatures' => $candidatures,
+            'membre' => $membre
         ]);
     }
 

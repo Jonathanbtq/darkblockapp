@@ -5,14 +5,21 @@
 {% block body %}
 <div class="main_acc_div">
     <div class="acc_wth">
-        <a href="{{path('app_logout')}}">Deconnexion</a>
-        {% if app.user.pseudo is defined %}
-            <h1>Bienvenue {{user.pseudo}}</h1>
-        {% else %}
-            <h1>Bienvenue {{user.email}}</h1>
-        {% endif %}
+        <div class="acc_top_header">
+            {% if membre.pseudo is defined %}
+                <img src="https://crafatar.com/renders/head/{{membre.getUuid}}?size=64&overlay&default=MHF_Steve" alt="">
+            {% endif %}
+            <h1>Bienvenue 
+                {% if app.user.pseudo is defined %}
+                    {{user.pseudo}}
+                {% else %}
+                    {{user.email}}
+                {% endif %}
+            </h1>
+        </div>
+        {# <a href="{{path('app_logout')}}">Deconnexion</a> #}
         <a class="acc_a_modif" href="{{path('account_modif', {id: user.id})}}">Modifier mes informations</a>
-        <h2>Tes Candidatures ---></h2>
+        <h2>Tes Candidatures <i class="fa-solid fa-arrow-right fa-2xs"></i></h2>
         {% for candidature in candidatures %}
             <div class="acc_candid_div">
                 <div class="candid_header">

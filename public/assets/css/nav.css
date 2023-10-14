@@ -192,7 +192,7 @@ background-color: rgb(163, 57, 57);
     display: none;
     box-shadow: rgba(149, 157, 165, 0.493) 0px 8px 24px;
 }
-ul li:hover .dropdown{
+.prof_dropdown:hover .dropdown{
     display: block;
 }
 .dropdown li a{
