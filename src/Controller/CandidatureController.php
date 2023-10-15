@@ -35,7 +35,7 @@ class CandidatureController extends AbstractController
 
         if($this->getUser()){
             $candidExist = $candidatureRepo->findBy(['user' => $this->getUser()]);
-            if(count($candidExist) > 5 ){
+            if(count($candidExist) > 5 || count($candidExist) >= 1){
                 return $this->redirectToRoute('error_candid');
             }
         }
@@ -65,7 +65,7 @@ class CandidatureController extends AbstractController
                 }
             }
 
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('success_candid', ['candid' => $candidature->getId()]);
         }  
 
         $email = (new Email())
@@ -124,5 +124,11 @@ class CandidatureController extends AbstractController
         return $this->render('candidature/errorcandid.html.twig', [
             'message' => $message
         ]);
+    }
+
+    #[Route('/successcandid/{candid}', name: 'success_candid')]
+    public function successCandid($candid): Response
+    {
+        return $this->render('candidature/successcandid.html.twig', []);
     }
 }
