@@ -120,7 +120,7 @@ class CandidatureController extends AbstractController
     #[Route('/toomuchcandid', name: 'error_candid')]
     public function errorcandid(): Response
     {
-        $message = 'Vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
+        $message = 'Vous avez une candidature en cours de vérification ou vous avez fait plus de 5 candidatures, veuillez contacter l\'admin du site';
         return $this->render('candidature/errorcandid.html.twig', [
             'message' => $message
         ]);
