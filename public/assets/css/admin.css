@@ -16,16 +16,25 @@ width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
 }
 .admin_top h1{
-    font-size: 25px;
+    font-size: 35px;
     font-weight: bold;
+    margin: 0;
 }
 .adm_candid_list{
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
     width: 100%;
+}
+.adm_candid_list h2{
+    width: 30%;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 1px var(--red-txt);
 }
 .adm_candid_card{
     display: flex;
@@ -56,6 +65,7 @@ width: 100%;
 .adm_list_user{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 .adm_user_list_ctn{
     display: flex;
@@ -66,10 +76,10 @@ width: 100%;
     display: flex;
     flex-direction: column;
     border-bottom: 1px grey solid;
-    background-color: grey;
+    background-color: rgba(209, 208, 208, 0.247);
     border-radius: 5px;
     padding: 10px;
-    width: 30%;
+    width: 20%;
 }
 .adm_user_card h2{
     margin: 0;
@@ -90,4 +100,15 @@ width: 100%;
     font-weight: bold;
     color: white;
     text-decoration: none;
+}
+.adm_add_img_membre{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.adm_add_img_membre div{
+    margin: 0;
+}
+.adm_add_img_membre input{
+    margin: 0;
 }

@@ -39,6 +39,7 @@ class CandidatureController extends AbstractController
                 return $this->redirectToRoute('error_candid');
             }
         }
+        
         if($form->isSubmitted() && $form->isValid()){
             if($this->getUser()){
                 $candidature->setUser($this->getUser());

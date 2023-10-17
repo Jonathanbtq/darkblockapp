@@ -51,6 +51,12 @@
     border-radius: 5px;
     background-color: #fdb800;
 }
+.login_btn_bottom{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+}
 .log_form_ctn_a{
     display: flex;
     align-items: center;
@@ -58,6 +64,7 @@
     width: 20%;
     height: 2vw;
     border-radius: 5px;
+    margin: 10px;
     font-weight: bold;
     color: black;
     margin-bottom: 100px;

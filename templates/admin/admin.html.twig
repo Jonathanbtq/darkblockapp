@@ -10,17 +10,59 @@
             <h1>Admin Panel</h1>
             <div class="adm_candid_list">
                 <h2>Candidatures</h2>
-                {% for candidature in candidatures %}
-                    <div class="card adm_candid_card">
-                        <div class="card_body">
-                            <h5 class="card-title">#{{candidature.id}}</h5>
-                            <p class="card-title">De {{candidature.getPseudoInGame}}</p>
-                            <p class="card-text">Statut : {{candidature.status}}</p>
-                            <p class="card-text">Date : {{candidature.getDateCandidature|date("d/m/Y")}}</p>
-                            <a href="{{path('show_candidature', {id:candidature.id})}}" class="btn btn-primary">Voir la Candidature</a>
-                        </div>
-                    </div>
-                {% endfor %}
+                <!-- Section pour les candidatures en vérification -->
+                <div class="candidature-section">
+                    <h3>En vérification</h3>
+                    {% for candidature in candidatures %}
+                        {% if candidature.status == 'En vérification' %}
+                            <div class="card adm_candid_card">
+                                <div class="card_body">
+                                    <h5 class="card-title">#{{candidature.id}}</h5>
+                                    <p class="card-title">De {{candidature.getPseudoInGame}}</p>
+                                    <p class="card-text">Statut : {{candidature.status}}</p>
+                                    <p class="card-text">Date : {{candidature.getDateCandidature|date("d/m/Y")}}</p>
+                                    <a href="{{path('show_candidature', {id:candidature.id})}}" class="btn btn-primary">Voir la Candidature</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Section pour les candidatures acceptées -->
+                <div class="candidature-section">
+                    <h3>Acceptées</h3>
+                    {% for candidature in candidatures %}
+                        {% if candidature.status == 'Accepter' %}
+                            <div class="card adm_candid_card">
+                                <div class="card_body">
+                                    <h5 class="card-title">#{{candidature.id}}</h5>
+                                    <p class="card-title">De {{candidature.getPseudoInGame}}</p>
+                                    <p class="card-text">Statut : {{candidature.status}}</p>
+                                    <p class="card-text">Date : {{candidature.getDateCandidature|date("d/m/Y")}}</p>
+                                    <a href="{{path('show_candidature', {id:candidature.id})}}" class="btn btn-primary">Voir la Candidature</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Section pour les candidatures refusées -->
+                <div class="candidature-section">
+                    <h3>Refusées</h3>
+                    {% for candidature in candidatures %}
+                        {% if candidature.status == 'Refused' %}
+                            <div class="card adm_candid_card">
+                                <div class="card_body">
+                                    <h5 class="card-title">#{{candidature.id}}</h5>
+                                    <p class="card-title">De {{candidature.getPseudoInGame}}</p>
+                                    <p class="card-text">Statut : {{candidature.status}}</p>
+                                    <p class="card-text">Date : {{candidature.getDateCandidature|date("d/m/Y")}}</p>
+                                    <a href="{{path('show_candidature', {id:candidature.id})}}" class="btn btn-primary">Voir la Candidature</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             <div class="adm_list_user">
                 <h2>Users</h2>
@@ -34,8 +76,6 @@
                             {% endif %}
                             {% if user.candidatures is defined %}
                                 {% for candid in user.candidatures %}
-                                    <h2>{{candid.id}}</h2>
-                                    <p>{{candid.status}}</p>
                                     <p>{{candid.getDateCandidature|date("d/m/Y")}}</p>
                                     <a href="{{path('show_candidature', {id:candid.id})}}">Candidature</a>
                                 {% endfor %}
@@ -45,18 +85,18 @@
                 </div>
             </div>
             <div class="adm_add_img_membre">
-                <a href="">Ajouter une image de membre</a>
-                    {{ form_start(form) }}
-                    <div class="adm_form_portfolio">
-                        {{ form_row(form.pseudo) }}
-                    </div>
-                    <div class="adm_form_portfolio">
-                        {{ form_row(form.img) }}
-                    </div>
-                    <div>
-                        {{ form_row(form.save) }}
-                    </div>
-                    {{ form_end(form) }}
+                <h2>Nouvelle image portfolio</h2>
+                {{ form_start(form) }}
+                <div class="adm_form_portfolio">
+                    {{ form_row(form.pseudo) }}
+                </div>
+                <div class="adm_form_portfolio">
+                    {{ form_row(form.img) }}
+                </div>
+                <div>
+                    {{ form_row(form.save) }}
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

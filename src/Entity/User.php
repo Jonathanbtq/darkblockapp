@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $pseudo = null;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $resetToken;
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidature::class)]
     private Collection $candidatures;
 
@@ -122,6 +125,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->pseudo = $pseudo;
 
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
         return $this;
     }
 
