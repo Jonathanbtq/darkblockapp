@@ -70,9 +70,9 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/oubli-pass/{token}', name:'reset_pass')]
-    public function resetPass(): Response
-    {
+    // #[Route('/oubli-pass/{token}', name:'reset_pass')]
+    // public function resetPass(): Response
+    // {
 
-    }
+    // }
 }

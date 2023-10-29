@@ -31,4 +31,13 @@ class MainController extends AbstractController
             'imgmembre' => $imgMembre
         ]);
     }
+
+    #[Route('/vote', name: 'vote')]
+    public function vote(MembreRepository $membreRepo, ImageMembreRepository $imageMembreRepo): Response
+    {
+        
+        return $this->render('main/vote.html.twig', [
+            
+        ]);
+    }
 }
