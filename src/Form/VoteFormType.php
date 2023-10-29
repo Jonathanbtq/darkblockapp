@@ -14,7 +14,7 @@ class VoteFormType extends AbstractType
     {
         $builder
         ->add('question_text', TextType::class, [
-            'label' => 'Ta question'
+            'label' => 'Proposes un vote'
         ])
         ;
     }

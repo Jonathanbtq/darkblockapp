@@ -64,4 +64,16 @@ class MainController extends AbstractController
             'votes' => $votes
         ]);
     }
+
+    #[Route('/voteoui', name: 'voteoui')]
+    public function voteOui()
+    {
+        return $this->redirectToRoute('vote');
+    }
+
+    #[Route('votenon', name:'votenon')]
+    public function voteNon()
+    {
+        return $this->redirectToRoute('vote');
+    }
 }

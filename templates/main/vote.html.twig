@@ -10,13 +10,23 @@
     <div class="main_vote_div">
         <div class="vote_ctn">
             <div class="vote_top_wth">
-                <h1>Vote Page</h1>
-                {{form_start(form)}}
-                {{form_end(form)}}
+                <h1>Contribuez au façonnage de la guilde</h1>
+                <div class="vote_qst_user">
+                    {% if app.user %}
+                        {{form_start(form)}}
+                        {{form_row(form.question_text)}}
+                        <button type="submit">Valider</button>
+                        {{form_end(form)}}
+                    {% endif %}
+                </div>
                 <div class="vote_ctn_vot">
                     {% for vote in votes %}
                         <div class="vote_div_card">
-                            <h1>{{vote.getQuestionText}}</h1>
+                            <h2>{{vote.getQuestionText}}</h2>
+                            <div class="vote_choix">
+                                <a href="{{path('voteoui')}}">Oui</a>
+                                <a href="{{path('votenon')}}">Non</a>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
     padding-top: 150px;
     width: 100%;
 }
@@ -10,4 +11,74 @@
     flex-direction: column;
     padding-bottom: 150px;
     width: 60%;
+}
+.vote_top_wth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#vote_form_question_text{
+    height: 2vw !important;
+    padding: 0;
+}
+/* .vote_qst_user form div{
+    height: 2vw;
+} */
+.vote_qst_user form div label{
+    color: white;
+    text-align: center;
+}
+.vote_top_wth h1{
+    color: white;
+}
+.vote_qst_user{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.vote_qst_user form{
+    display: flex;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+    justify-content:  center;
+    padding-top: 50px;
+    width: 100%;
+}
+.vote_qst_user form button{
+    height: 2vw !important;
+}
+.vote_ctn_vot{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.vote_div_card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 50%;
+    padding: 10px;
+    border: 1px var(--blue-light-txt) solid;
+}
+.vote_div_card h2{
+    margin: 0 0 10px 0;
+    color: white;
+}
+.vote_choix{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+}
+.vote_choix a{
+    text-decoration: none;
+    color: white;
+    margin: 0 0 20px 20px;
+    background-color: var(--blue-light-txt);
+    font-size: 20px;
+    margin-right: 10px;
 }
