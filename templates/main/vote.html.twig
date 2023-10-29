@@ -7,10 +7,19 @@
 {% endblock %}
 
 {% block body %}
-    <div class="main_prt_div">
-        <div class="prt_ctn">
+    <div class="main_vote_div">
+        <div class="vote_ctn">
             <div class="vote_top_wth">
-                <h1>Vote</h1>
+                <h1>Vote Page</h1>
+                {{form_start(form)}}
+                {{form_end(form)}}
+                <div class="vote_ctn_vot">
+                    {% for vote in votes %}
+                        <div class="vote_div_card">
+                            <h1>{{vote.getQuestionText}}</h1>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,13 @@
+.main_vote_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    width: 100%;
+}
+.vote_ctn{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 150px;
+    width: 60%;
+}
