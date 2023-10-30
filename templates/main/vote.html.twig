@@ -4,6 +4,8 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/vote/votepourcentage.js') }}" defer></script>
+    <script src="{{ asset('assets/js/cookie/cookievote.js') }}" defer></script>
+    <script src="{{ asset('assets/js/cookie/cookiesavevote.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -12,12 +14,10 @@
             <div class="vote_top_wth">
                 <h1>Contribuez au façonnage de la guilde</h1>
                 <div class="vote_qst_user">
-                    {% if app.user %}
-                        {{form_start(form)}}
-                        {{form_row(form.question_text)}}
-                        <button type="submit"><i class="fa-solid fa-arrow-right fa-xl"></i></button>
-                        {{form_end(form)}}
-                    {% endif %}
+                    {{form_start(form)}}
+                    {{form_row(form.question_text)}}
+                    <button type="submit"><i class="fa-solid fa-arrow-right fa-xl"></i></button>
+                    {{form_end(form)}}
                 </div>
                 <div class="vote_ctn_vot">
                     {% for vote in votes %}
@@ -36,10 +36,12 @@
                                 {% endfor %}
 
                                 <div class="vote_back_choix">
-                                    <a href="{{ path('voteoui', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix" data="{{ouiPourcentage}}">Oui</a>
+                                    <a href="{{ path('voteoui', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix btn_js_coo" data-idvote="{{vote.id}}" data="{{ouiPourcentage}}">Oui</a>
+                                    <p>{{ouiPourcentage}} %</p>
                                 </div>
                                 <div class="vote_back_choix">
-                                    <a href="{{ path('votenon', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix" data="{{nonPourcentage}}">Non</a>
+                                    <a href="{{ path('votenon', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix btn_js_coo" data-idvote="{{vote.id}}" data="{{nonPourcentage}}">Non</a>
+                                    <p>{{nonPourcentage}} %</p>
                                 </div>
                             </div>
                             <div class="nb_card_vote_div">

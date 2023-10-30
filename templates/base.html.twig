@@ -25,7 +25,6 @@
         <link href="https://www.dafontfree.net/embed/aXJpc3VwYy1ib2xkJmRhdGEvNDAvaS8xMDMxMzMvVVBDSUIuVFRG" rel="stylesheet" type="text/css"/>
         
         <script src="https://kit.fontawesome.com/d02ac30c3f.js" crossorigin="anonymous"></script>
-        <script src="{{asset('assets/js/imgformcandid.js')}}" defer></script>
         <script src="{{ asset('build/jquery.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -38,6 +37,7 @@
     <body>
         {% include "_partials/_nav.html.twig" %}
         {% block body %}{% endblock %}
+        {% include "_partials/cookie/cookie.html.twig" %}
         {% include "_partials/_footer.html.twig" %}
     </body>
 </html>

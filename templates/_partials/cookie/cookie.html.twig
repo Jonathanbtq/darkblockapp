@@ -1,0 +1,39 @@
+{% block javascripts %}
+    <script src="{{ asset('assets/js/cookie/cookievote.js') }}" defer></script>
+{% endblock %}
+<style>
+    .cookie{
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 50px;
+        padding: 25px;
+        border-radius: 25px;
+        display: flex;
+        width: 25%;
+        background-color: black;
+    }
+    .cookie p, .cookie h3{
+        color: white;
+    }
+</style>
+<div class="cookie">
+    <div class="cookie_div">
+        <div class="cookie_main">
+            <div class="cookie_top">
+                <div class="cookie_services">
+                    <h3>Cookie</h3>
+                    <p>Acceptez-vous les cookies? Ils nous serviront à retenir en mémoire vos votes, section vote du site</p>
+                </div>
+                <div class="cookie_btn">
+                    <button class="cookie_btn_oui">Oui</button>
+                    <button class="cookie_btn_non">Non</button>
+                </div>
+                <div class="cookie_desc">
+                    <h3>- Lord Block -</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

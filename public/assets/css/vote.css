@@ -71,11 +71,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 25px;
     width: 50%;
     padding: 10px;
     margin-bottom: 50px;
-    border: 1px var(--blue-light-txt) solid;
+    background-color: rgb(37, 37, 37);
+    /* border: 1px var(--blue-light-txt) solid; */
 }
 .vote_div_card h2{
     margin: 0 0 10px 0;
@@ -92,9 +93,22 @@
     text-decoration: none;
     color: white;
     padding-left: 10px;
-    margin: 0 0 20px 20px;
     background-color: var(--blue-light-txt);
     font-size: 20px;
+}
+.vote_back_choix{
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    align-items: center;
+    padding-bottom: 10px;
+    width: 90%;
+}
+.vote_back_choix p{
+    position: absolute;
+    right: 30px;
+    color: white;
+    margin: 0;
 }
 .nb_card_vote_div{
     display: flex;
