@@ -92,14 +92,23 @@ class MainController extends AbstractController
             $ouiPourcentage = $ouiCount / $totalVote * 100;
             $nonPourcentage = $nonCount / $totalVote * 100;
 
-            $voteData = ['oui' => $ouiCount, 'non' => $nonCount, 'idvote' => $voteId, 'ouiPourcentage' => $ouiPourcentage, 'nonPourcentage' => $nonPourcentage];
+            $voteData = ['oui' => $ouiCount,
+            'non' => $nonCount,
+            'idvote' => $voteId,
+            'ouiPourcentage' => $ouiPourcentage,
+            'nonPourcentage' => $nonPourcentage,
+            ];
+
+            $vote->setNbVote($totalVote);
+            $voteRepo->save($vote, true);
             $voteTab['vote' . $actualId] = $voteData;
         }
 
         return $this->render('main/vote.html.twig', [
             'form' => $form,
             'votes' => $votes,
-            'voteCount' => $voteTab
+            'voteCount' => $voteTab,
+            'totalVote' => $totalVote
         ]);
     }
 

@@ -33,23 +33,21 @@ class Tools{
         $dataExist = $voteCountRepo->findBy(['data_user' => $data]);
         
         if($dataExist){
-            $foundMatchingVote = false;
-
             foreach($dataExist as $dataE){
                 if($dataE->getVote()->getId() == $voteCount->getVote()->getId()){
                     // Si l'ip du vote existant n'est pas le meme que l'ip du nouveau vote
                     if($dataE->getDataUser() != $voteCount->getDataUser()){
                         return true;
                     }else{
-                        $foundMatchingVote = true;
+                        if ($dataE->getReponse() == $voteCount->getReponse()) {
+                            return false; // L'utilisateur a déjà voté pour cette réponse
+                        } else {
+                            // Supprimez l'ancien vote et permettez à l'utilisateur de revoter
+                            $voteCountRepo->remove($dataE, true);
+                            return true;
+                        }
                     }
                 }
-            }
-            // Après avoir parcouru tous les votes correspondants, décidez si le vote est autorisé
-            if ($foundMatchingVote) {
-                return false; // Un vote correspondant a été trouvé, mais l'IP est la même
-            } else {
-                return true; // Aucun vote correspondant avec l'IP différente
             }
         }else{
             return true;

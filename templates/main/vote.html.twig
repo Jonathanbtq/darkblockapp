@@ -15,7 +15,7 @@
                     {% if app.user %}
                         {{form_start(form)}}
                         {{form_row(form.question_text)}}
-                        <button type="submit">Valider</button>
+                        <button type="submit"><i class="fa-solid fa-arrow-right fa-xl"></i></button>
                         {{form_end(form)}}
                     {% endif %}
                 </div>
@@ -41,6 +41,9 @@
                                 <div class="vote_back_choix">
                                     <a href="{{ path('votenon', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix" data="{{nonPourcentage}}">Non</a>
                                 </div>
+                            </div>
+                            <div class="nb_card_vote_div">
+                                <p class="vote_nb_card">Votes : {{totalVote}}</p>
                             </div>
                         </div>
                     {% endfor %}
