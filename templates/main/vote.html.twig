@@ -27,11 +27,13 @@
                                 {% set idMatch = false %}
                                 {% set ouiPourcentage = null %}
                                 {% set nonPourcentage = null %}
+                                {% set totalVote = null %}
                                 {% for voteC in voteCount %}
                                     {% if voteC.idvote == vote.id %}
                                         {% set idMatch = true %}
                                         {% set ouiPourcentage = voteC.ouiPourcentage %}
                                         {% set nonPourcentage = voteC.nonPourcentage %}
+                                        {% set totalVote = voteC.totalVote %}
                                     {% endif %}
                                 {% endfor %}
 

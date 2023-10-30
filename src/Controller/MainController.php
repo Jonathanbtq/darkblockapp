@@ -69,46 +69,51 @@ class MainController extends AbstractController
         $nonCount = 0;
 
         $actualId = null;
-        foreach($voteCount as $voteC){
-            $vote = $voteC->getVote();
-            $voteId = $vote->getId();
+        if($voteCount != null){
+            foreach($voteCount as $voteC){
+                $vote = $voteC->getVote();
+                $voteId = $vote->getId();
 
-            if($actualId == null){
-                $actualId = $voteId;
-            }elseif ($actualId !== $voteId) {
-                $actualId = $voteId;
-                $ouiCount = 0;
-                $nonCount = 0;
+                if($actualId == null){
+                    $actualId = $voteId;
+                }elseif ($actualId !== $voteId) {
+                    $actualId = $voteId;
+                    $ouiCount = 0;
+                    $nonCount = 0;
+                }
+                // Vérifiez la valeur du vote
+                if ($voteC->getReponse() === "oui") {
+                    $ouiCount++;
+                } elseif ($voteC->getReponse() === "non") {
+                    $nonCount++;
+                }
+
+                // Calcul du pourcentage pour affichage barre de progression
+                $totalVote = $ouiCount + $nonCount;
+                $ouiPourcentage = round($ouiCount / $totalVote * 100);
+                $nonPourcentage = round($nonCount / $totalVote * 100);
+
+
+                $voteData = ['oui' => $ouiCount,
+                'non' => $nonCount,
+                'idvote' => $voteId,
+                'ouiPourcentage' => $ouiPourcentage,
+                'nonPourcentage' => $nonPourcentage,
+                'totalVote' => $totalVote
+                ];
+
+                $vote->setNbVote($totalVote);
+                $voteRepo->save($vote, true);
+                $voteTab['vote' . $actualId] = $voteData;
             }
-            // Vérifiez la valeur du vote
-            if ($voteC->getReponse() === "oui") {
-                $ouiCount++;
-            } elseif ($voteC->getReponse() === "non") {
-                $nonCount++;
-            }
-
-            // Calcul du pourcentage pour affichage barre de progression
-            $totalVote = $ouiCount + $nonCount;
-            $ouiPourcentage = $ouiCount / $totalVote * 100;
-            $nonPourcentage = $nonCount / $totalVote * 100;
-
-            $voteData = ['oui' => $ouiCount,
-            'non' => $nonCount,
-            'idvote' => $voteId,
-            'ouiPourcentage' => $ouiPourcentage,
-            'nonPourcentage' => $nonPourcentage,
-            ];
-
-            $vote->setNbVote($totalVote);
-            $voteRepo->save($vote, true);
-            $voteTab['vote' . $actualId] = $voteData;
+        }else{
+            $totalVote = 0;
         }
 
         return $this->render('main/vote.html.twig', [
             'form' => $form,
             'votes' => $votes,
             'voteCount' => $voteTab,
-            'totalVote' => $totalVote
         ]);
     }
 
