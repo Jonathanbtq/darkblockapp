@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Vote;
+use App\Entity\VoteCount;
 use App\Form\VoteFormType;
 use App\Repository\ImageMembreRepository;
 use App\Repository\MembreRepository;
+use App\Repository\VoteCountRepository;
 use App\Repository\VoteRepository;
+use App\Service\Tools;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,15 +68,45 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/voteoui', name: 'voteoui')]
-    public function voteOui()
+    /**
+     * Répondre oui à un vote
+     */
+    #[Route('/voteoui/{idvote}', name: 'voteoui')]
+    public function voteOui($idvote, VoteCountRepository $voteCountRepo, VoteRepository $voteRepo)
     {
+        $vote = $voteRepo->findOneBy(['id' => $idvote]);
+        $this->responseVote($voteCountRepo, 'oui', $vote);
         return $this->redirectToRoute('vote');
     }
 
-    #[Route('votenon', name:'votenon')]
-    public function voteNon()
+    /**
+     * Répondre non à un vote
+     */
+    #[Route('votenon/{idvote}', name:'votenon')]
+    public function voteNon($idvote, VoteCountRepository $voteCountRepo, VoteRepository $voteRepo)
     {
+        $vote = $voteRepo->findOneBy(['id' => $idvote]);
+        $this->responseVote($voteCountRepo, 'non', $vote);
         return $this->redirectToRoute('vote');
+    }
+
+    /**
+     * Permet de créer une réponse au vote
+     */
+    public function responseVote($voteCountRepo, $response, $idvote){
+        $tools = new Tools();
+
+        $addIp = $_SERVER['REMOTE_ADDR'];
+        if($tools->searchUser($addIp, $voteCountRepo)){
+            $voteCount = new VoteCount();
+            $voteCount->setReponse($response);
+            $voteCount->setDataUser($addIp);
+            $voteCount->setVote($idvote);
+
+            $voteCountRepo->save($voteCount, true);
+            return $voteCount;
+        }else{
+            return false;
+        }
     }
 }

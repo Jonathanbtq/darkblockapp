@@ -24,8 +24,8 @@
                         <div class="vote_div_card">
                             <h2>{{vote.getQuestionText}}</h2>
                             <div class="vote_choix">
-                                <a href="{{path('voteoui')}}">Oui</a>
-                                <a href="{{path('votenon')}}">Non</a>
+                                <a href="{{path('voteoui', {idvote: vote.id})}}">Oui</a>
+                                <a href="{{path('votenon', {idvote: vote.id})}}">Non</a>
                             </div>
                         </div>
                     {% endfor %}

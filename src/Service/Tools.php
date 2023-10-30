@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Repository\VoteCountRepository;
+
 class Tools{
 
     public function createimgfolder($photoDir, $img, $membre){
@@ -17,5 +19,20 @@ class Tools{
             $img->move($cheminDossier, $filename);
         }
         return $filename;
+    }
+
+    /**
+     * Vérifier si l'utiliateur a deja voter
+     *
+     * @param [type] $data
+     * @return void
+     */
+    public function searchUser($data, VoteCountRepository $voteCountRepo){
+        $dataExist = $voteCountRepo->findOneBy(['data_user' => $data]);
+        if(!$dataExist){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

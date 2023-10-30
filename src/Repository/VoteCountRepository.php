@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Vote;
+use App\Entity\VoteCount;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Vote>
+ * @extends ServiceEntityRepository<VoteCount>
  *
- * @method Vote|null find($id, $lockMode = null, $lockVersion = null)
- * @method Vote|null findOneBy(array $criteria, array $orderBy = null)
- * @method Vote[]    findAll()
- * @method Vote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method VoteCount|null find($id, $lockMode = null, $lockVersion = null)
+ * @method VoteCount|null findOneBy(array $criteria, array $orderBy = null)
+ * @method VoteCount[]    findAll()
+ * @method VoteCount[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VoteRepository extends ServiceEntityRepository
+class VoteCountRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Vote::class);
+        parent::__construct($registry, VoteCount::class);
     }
-    
-    public function save(Vote $entity, bool $flush = false): void
+
+    public function save(VoteCount $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class VoteRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Vote $entity, bool $flush = false): void
+    public function remove(VoteCount $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -38,9 +38,8 @@ class VoteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 //    /**
-//     * @return Vote[] Returns an array of Vote objects
+//     * @return VoteCount[] Returns an array of VoteCount objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +53,7 @@ class VoteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Vote
+//    public function findOneBySomeField($value): ?VoteCount
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')
