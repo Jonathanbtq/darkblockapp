@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/tete_portofolio.js') }}" defer></script>
+    <script src="{{ asset('assets/js/vote/votepourcentage.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -24,8 +24,23 @@
                         <div class="vote_div_card">
                             <h2>{{vote.getQuestionText}}</h2>
                             <div class="vote_choix">
-                                <a href="{{path('voteoui', {idvote: vote.id})}}">Oui</a>
-                                <a href="{{path('votenon', {idvote: vote.id})}}">Non</a>
+                                {% set idMatch = false %}
+                                {% set ouiPourcentage = null %}
+                                {% set nonPourcentage = null %}
+                                {% for voteC in voteCount %}
+                                    {% if voteC.idvote == vote.id %}
+                                        {% set idMatch = true %}
+                                        {% set ouiPourcentage = voteC.ouiPourcentage %}
+                                        {% set nonPourcentage = voteC.nonPourcentage %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="vote_back_choix">
+                                    <a href="{{ path('voteoui', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix" data="{{ouiPourcentage}}">Oui</a>
+                                </div>
+                                <div class="vote_back_choix">
+                                    <a href="{{ path('votenon', { idvote: vote.id }) }}" class="{{ idMatch ? 'vote_match' : 'vote_no_match' }} vote_choix" data="{{nonPourcentage}}">Non</a>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}

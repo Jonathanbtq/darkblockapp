@@ -40,7 +40,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/vote', name: 'vote')]
-    public function vote(Request $request, MembreRepository $membreRepo, VoteRepository $voteRepo): Response
+    public function vote(Request $request, MembreRepository $membreRepo, VoteRepository $voteRepo, VoteCountRepository $voteCountRepo): Response
     {
         $vote = new Vote();
         $form = $this->createForm(VoteFormType::class, $vote);
@@ -61,10 +61,45 @@ class MainController extends AbstractController
         }
 
         $votes = $voteRepo->findAll();
+        $voteCount = $voteCountRepo->findAll();
+
+        $voteTab = [];
+
+        $ouiCount = 0;
+        $nonCount = 0;
+
+        $actualId = null;
+        foreach($voteCount as $voteC){
+            $vote = $voteC->getVote();
+            $voteId = $vote->getId();
+
+            if($actualId == null){
+                $actualId = $voteId;
+            }elseif ($actualId !== $voteId) {
+                $actualId = $voteId;
+                $ouiCount = 0;
+                $nonCount = 0;
+            }
+            // Vérifiez la valeur du vote
+            if ($voteC->getReponse() === "oui") {
+                $ouiCount++;
+            } elseif ($voteC->getReponse() === "non") {
+                $nonCount++;
+            }
+
+            // Calcul du pourcentage pour affichage barre de progression
+            $totalVote = $ouiCount + $nonCount;
+            $ouiPourcentage = $ouiCount / $totalVote * 100;
+            $nonPourcentage = $nonCount / $totalVote * 100;
+
+            $voteData = ['oui' => $ouiCount, 'non' => $nonCount, 'idvote' => $voteId, 'ouiPourcentage' => $ouiPourcentage, 'nonPourcentage' => $nonPourcentage];
+            $voteTab['vote' . $actualId] = $voteData;
+        }
 
         return $this->render('main/vote.html.twig', [
             'form' => $form,
-            'votes' => $votes
+            'votes' => $votes,
+            'voteCount' => $voteTab
         ]);
     }
 
@@ -93,16 +128,15 @@ class MainController extends AbstractController
     /**
      * Permet de créer une réponse au vote
      */
-    public function responseVote($voteCountRepo, $response, $idvote){
+    public function responseVote($voteCountRepo, $response, $vote){
         $tools = new Tools();
 
         $addIp = $_SERVER['REMOTE_ADDR'];
-        if($tools->searchUser($addIp, $voteCountRepo)){
-            $voteCount = new VoteCount();
-            $voteCount->setReponse($response);
-            $voteCount->setDataUser($addIp);
-            $voteCount->setVote($idvote);
-
+        $voteCount = new VoteCount();
+        $voteCount->setReponse($response);
+        $voteCount->setDataUser($addIp);
+        $voteCount->setVote($vote);
+        if($tools->searchUser($addIp, $voteCountRepo, $voteCount)){
             $voteCountRepo->save($voteCount, true);
             return $voteCount;
         }else{
