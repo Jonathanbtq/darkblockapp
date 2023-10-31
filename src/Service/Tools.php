@@ -31,7 +31,6 @@ class Tools{
      */
     public function searchUser($data, VoteCountRepository $voteCountRepo, $voteCount){
         $dataExist = $voteCountRepo->findBy(['data_user' => $data]);
-        
         if($dataExist){
             foreach($dataExist as $dataE){
                 if($dataE->getVote()->getId() == $voteCount->getVote()->getId()){

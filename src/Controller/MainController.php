@@ -64,50 +64,42 @@ class MainController extends AbstractController
         $voteCount = $voteCountRepo->findAll();
 
         $voteTab = [];
+        $voteData = [];
 
-        $ouiCount = 0;
-        $nonCount = 0;
-
-        $actualId = null;
         if($voteCount != null){
-            foreach($voteCount as $voteC){
+            foreach ($voteCount as $voteC) {
                 $vote = $voteC->getVote();
                 $voteId = $vote->getId();
-
-                if($actualId == null){
-                    $actualId = $voteId;
-                }elseif ($actualId !== $voteId) {
-                    $actualId = $voteId;
-                    $ouiCount = 0;
-                    $nonCount = 0;
-                }
+            
                 // Vérifiez la valeur du vote
                 if ($voteC->getReponse() === "oui") {
-                    $ouiCount++;
+                    $voteData[$voteId]['oui'] = ($voteData[$voteId]['oui'] ?? 0) + 1;
                 } elseif ($voteC->getReponse() === "non") {
-                    $nonCount++;
+                    $voteData[$voteId]['non'] = ($voteData[$voteId]['non'] ?? 0) + 1;
                 }
-
-                // Calcul du pourcentage pour affichage barre de progression
-                $totalVote = $ouiCount + $nonCount;
-                $ouiPourcentage = round($ouiCount / $totalVote * 100);
-                $nonPourcentage = round($nonCount / $totalVote * 100);
-
-
-                $voteData = ['oui' => $ouiCount,
-                'non' => $nonCount,
-                'idvote' => $voteId,
-                'ouiPourcentage' => $ouiPourcentage,
-                'nonPourcentage' => $nonPourcentage,
-                'totalVote' => $totalVote
-                ];
-
-                $vote->setNbVote($totalVote);
-                $voteRepo->save($vote, true);
-                $voteTab['vote' . $actualId] = $voteData;
             }
-        }else{
-            $totalVote = 0;
+            
+            // Mettez à jour le nombre total de votes après avoir calculé les totaux pour chaque vote
+            foreach ($voteData as $voteId => $data) {
+                $totalVote = ($data['oui'] ?? 0) + ($data['non'] ?? 0);
+                $ouiPourcentage = round(($data['oui'] ?? 0) / $totalVote * 100);
+                $nonPourcentage = round(($data['non'] ?? 0) / $totalVote * 100);
+            
+                $voteTab['vote' . $voteId] = [
+                    'oui' => $data['oui'] ?? 0,
+                    'non' => $data['non'] ?? 0,
+                    'idvote' => $voteId,
+                    'ouiPourcentage' => $ouiPourcentage,
+                    'nonPourcentage' => $nonPourcentage,
+                    'totalVote' => $totalVote
+                ];
+            
+                $vote = $voteRepo->find($voteId);
+                if ($vote) {
+                    $vote->setNbVote($totalVote);
+                    $voteRepo->save($vote, true);
+                }
+            }
         }
 
         return $this->render('main/vote.html.twig', [
