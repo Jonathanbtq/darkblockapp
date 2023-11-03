@@ -128,8 +128,29 @@
 .prt_equipe_slider{
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    align-items: center;
+    position: relative;
     width: 60%;
+}
+.prt_equipe_slider button{
+    z-index: 999;
+    height: 3vw;
+    width: 3vw;
+    border-radius: 100%;
+    position: absolute;
+}
+.prt_equipe_slider button:nth-child(1){
+    left: 0;
+}
+.prt_equipe_slider button:nth-child(3){
+    right: 0;
+}
+.prt_wtn_head{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: start;
+    overflow-x: scroll;
+    transition: transform 0.3s ease;
 }
 .prt_equipe_tete_card{
     display: flex;
@@ -140,7 +161,7 @@
     margin-right: 10px;
     border: 2px solid transparent;
     transition: border-color 1.2s ease;
-    width: 10%;
+    min-width: 120px;
 }
 .prt_equipe_tete_card img{
     width: 90%;

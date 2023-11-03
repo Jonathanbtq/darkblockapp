@@ -31,15 +31,19 @@
                     <div class="prt_ligne_head"></div>
                 </div>
                 <div class="prt_equipe_slider">
+                    <button id="prevButton">precedent</button>
+                    <div class="prt_wtn_head">
                     {% for membre in membres %}
-                    <div class="prt_equipe_tete_card">
-                        <img src="https://crafatar.com/renders/head/{{membre.getUuid}}?size=64&overlay&default=MHF_Steve" alt="">
-                        <p>{{membre.pseudo}}</p>
-                        <div class="prt_eip_card_dsc">
-                            <p>{{membre.description}}</p>
+                        <div class="prt_equipe_tete_card">
+                            <img src="https://crafatar.com/renders/head/{{membre.getUuid}}?size=64&overlay&default=MHF_Steve" alt="">
+                            <p>{{membre.pseudo}}</p>
+                            <div class="prt_eip_card_dsc">
+                                <p>{{membre.description}}</p>
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
+                    </div>
+                    <button id="nextButton">suivant</button>
                 </div>
             </div>
             <div class="prt_img_div">
