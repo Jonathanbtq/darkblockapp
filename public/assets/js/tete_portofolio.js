@@ -89,7 +89,7 @@ const firstImg = productContainers.querySelectorAll('.prt_equipe_tete_card img')
 const nxtBtn = document.getElementById('nextButton');
 const preBtn = document.getElementById('prevButton');
 
-const arrowIcons = document.querySelectorAll('.prt_equipe_slider button')
+const arrowIcons = document.querySelectorAll('.prt_equipe_slider i')
 
 const imgCard = document.querySelector('.prt_equipe_tete_card');
 let totalWidth = imgCard.offsetWidth;

@@ -132,17 +132,23 @@
     position: relative;
     width: 60%;
 }
-.prt_equipe_slider button{
+.prt_equipe_slider i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 999;
+    margin-right: 10px;
     height: 3vw;
+    cursor: pointer;
     width: 3vw;
     border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.295);
     position: absolute;
 }
-.prt_equipe_slider button:nth-child(1){
+.prt_equipe_slider i:nth-child(1){
     left: 0;
 }
-.prt_equipe_slider button:nth-child(3){
+.prt_equipe_slider i:nth-child(3){
     right: 0;
 }
 .prt_wtn_head{
@@ -151,6 +157,7 @@
     align-items: start;
     overflow-x: scroll;
     transition: transform 0.3s ease;
+    padding-left: 50px;
 }
 .prt_equipe_tete_card{
     display: flex;
