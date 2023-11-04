@@ -51,4 +51,32 @@ class ApiController extends AbstractController
 
         return new JsonResponse([$candid]);
     }
+
+    #[Route('/api/getNewCandidature', name:'getNewCandid', methods: ['GET'])]
+    public function getNewCandid(CandidatureRepository $candidRepo){
+        $candid = $candidRepo->findAll();
+        $newCandid = [];
+        $foundAccepted = false; // Variable pour suivre si un élément correspond à la condition
+
+        foreach($candid as $data){
+            if($data->getStatus() === 'En vérification'){
+                $formattedData[] = [
+                    'id' => $data->getId(),
+                    'text' => $data->getText(),
+                    'pseudo' => $data->getPseudoInGame(),
+                    'date' => $data->getDateCandidature(),
+                    'status' => $data->getStatus(),
+                    'description' => 'Nouvelles candidatures'
+                ];
+                array_push($newCandid, $data);
+                $foundAccepted = true; // Marquez qu'un élément correspond à la condition
+            }
+        }
+    
+        if ($foundAccepted) {
+            return new JsonResponse($formattedData);
+        } else {
+            return new JsonResponse(false);
+        }
+    }
 }
