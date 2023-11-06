@@ -121,4 +121,13 @@ class AdminController extends AbstractController
         $candidatureRepo->save($candid, true);
         return $this->redirectToRoute('admin_index');
     }
+
+    #[Route('/delmember/{idmember}', name: 'delmember')]
+    public function deleteMember($idmember, MembreRepository $memberRepo)
+    {
+        $member = $memberRepo->findObeBy(['id' => $idmember]);
+
+        $memberRepo->remove($member, true);
+        return $this->redirectToRoute('admin_index');
+    }
 }
