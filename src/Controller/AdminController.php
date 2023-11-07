@@ -10,8 +10,11 @@ use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\MembreRepository;
 use App\Controller\CandidatureController;
+use App\Entity\OldMember;
+use App\Form\BanMemberFormType;
 use App\Repository\CandidatureRepository;
 use App\Repository\ImageMembreRepository;
+use App\Repository\OldMemberRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo, Request $request, ImageMembreRepository $imgMembreRepo, #[Autowire('%membre_portfolio_dir%')] string $photoDir, MembreRepository $membreRepo): Response
+    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo, Request $request, ImageMembreRepository $imgMembreRepo, #[Autowire('%membre_portfolio_dir%')] string $photoDir, MembreRepository $membreRepo, OldMemberRepository $oldMemberRepo): Response
     {
         $candidatures = $candidatureRepo->findAll();
         $utilisateur = $userRepo->findAll();
@@ -60,10 +63,33 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_index');
         }
 
+        /**
+         * Départ d'un membre et ajout à oldMember
+         */
+        $formLeave = $this->createForm(BanMemberFormType::class);
+        $formLeave->handleRequest($request);
+        
+        if ($formLeave->isSubmitted() && $formLeave->isValid()) { 
+            $member = $formLeave['pseudo']->getData();
+            $raison = $formLeave['raison']->getData();
+
+            $oldMember = new OldMember();
+            $oldMember->setPseudo($member->getPseudo());
+            $oldMember->setDateAccepted($member->getDateAccepted());
+            $oldMember->setDateLeave(new \DateTime());
+            $oldMember->setUuid($member->getUuid());
+            $oldMember->setLeaveReason($raison);
+
+            $oldMemberRepo->save($oldMember, true);
+            $membreRepo->remove($member, true);
+            return $this->redirectToRoute('admin_index');
+        }
+
         return $this->render('admin/admin.html.twig', [
             'candidatures' => $candidatures,
             'users' => $utilisateur,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formleave' => $formLeave->createView()
         ]);
     }
 
@@ -119,15 +145,6 @@ class AdminController extends AbstractController
         $candid = $candidatureRepo->findOneBy(['id' => $idcandid]);
         $candid->setStatus('Refused');
         $candidatureRepo->save($candid, true);
-        return $this->redirectToRoute('admin_index');
-    }
-
-    #[Route('/delmember/{idmember}', name: 'delmember')]
-    public function deleteMember($idmember, MembreRepository $memberRepo)
-    {
-        $member = $memberRepo->findObeBy(['id' => $idmember]);
-
-        $memberRepo->remove($member, true);
         return $this->redirectToRoute('admin_index');
     }
 }

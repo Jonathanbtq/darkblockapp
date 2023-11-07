@@ -26,6 +26,9 @@ class OldMember
     #[ORM\Column(length: 100)]
     private ?string $leave_reason = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $uuid = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class OldMember
     public function setLeaveReason(string $leave_reason): static
     {
         $this->leave_reason = $leave_reason;
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): static
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
