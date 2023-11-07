@@ -16,7 +16,7 @@ class BanMemberFormType extends AbstractType
     {
         $builder
             ->add('pseudo', EntityType::class, [
-                'label' => 'pseudo',
+                'label' => 'Pseudo',
                 'class' => Membre::class,
                 'choice_label' => 'pseudo'
             ])
