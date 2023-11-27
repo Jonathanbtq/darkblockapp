@@ -31,7 +31,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setPseudo($form->get('pseudo')->getData());
+            // $user->setPseudo($form->get('pseudo')->getData());
+            $user->setPseudo($request->request->get('pseudo'));
             $user->setRoles(['ROLE_USER']);
 
             $entityManager->persist($user);
