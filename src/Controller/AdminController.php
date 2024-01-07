@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BlackList;
 use App\Entity\Membre;
 use App\Service\Tools;
 use GuzzleHttp\Client;
@@ -9,9 +10,10 @@ use App\Entity\ImageMembre;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\MembreRepository;
-use App\Controller\CandidatureController;
 use App\Entity\OldMember;
 use App\Form\BanMemberFormType;
+use App\Form\BlackListFormType;
+use App\Repository\BlackListRepository;
 use App\Repository\CandidatureRepository;
 use App\Repository\ImageMembreRepository;
 use App\Repository\OldMemberRepository;
@@ -21,8 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo, Request $request, ImageMembreRepository $imgMembreRepo, #[Autowire('%membre_portfolio_dir%')] string $photoDir, MembreRepository $membreRepo, OldMemberRepository $oldMemberRepo): Response
+    public function index(CandidatureRepository $candidatureRepo, UserRepository $userRepo, Request $request, ImageMembreRepository $imgMembreRepo, #[Autowire('%membre_portfolio_dir%')] string $photoDir, MembreRepository $membreRepo, OldMemberRepository $oldMemberRepo, BlackListRepository $bListRepo): Response
     {
         $candidatures = $candidatureRepo->findAll();
         $utilisateur = $userRepo->findAll();
@@ -85,11 +85,29 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_index');
         }
 
+        /**
+         * Ajout d'un joueur à la BlackList
+         */
+        $BlackListForm = $this->createForm(BlackListFormType::class);
+        $BlackListForm->handleRequest($request);
+
+        if($BlackListForm->isSubmitted() && $BlackListForm->isValid()){
+            $member = $BlackListForm['pseudo']->getData();
+            $raison = $BlackListForm['raison']->getData();
+
+            $bList = new BlackList();
+            $bList->setPseudo($member);
+            $bList->setRaison($raison);
+            $bListRepo->save($bList, true);
+            return $this->redirectToRoute('admin_index');
+        }
+
         return $this->render('admin/admin.html.twig', [
             'candidatures' => $candidatures,
             'users' => $utilisateur,
             'form' => $form->createView(),
-            'formleave' => $formLeave->createView()
+            'formleave' => $formLeave->createView(),
+            'blistform' => $BlackListForm->createView()
         ]);
     }
 
